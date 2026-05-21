@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en" data-lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Research note on bank personal financial product marketing strategy.">
+    <title>Wealth-Product Demand · Pengbiao (Jerry) Chen</title>
+    <link rel="stylesheet" href="../assets/css/styles.css?v=left-rail-20260521">
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <a class="portrait" href="../index.html?v=site-20260521" aria-label="Home">
+          <picture>
+            <source srcset="../assets/img/jerry-photo-ai-portrait.png" type="image/png">
+            <img src="../assets/img/jerry-photo-ai-portrait.png" alt="Pengbiao Jerry Chen">
+          </picture>
+        </a>
+        <div class="identity">
+          <h1>Jerry Chen</h1>
+          <p>
+            <span class="en">Master of Mathematical Finance student at the University of Toronto, with experience across risk, banking consulting, and empirical finance research.</span>
+            <span class="zh">多伦多大学数学金融硕士在读，具备风险管理、银行科技咨询和实证金融研究经历。</span>
+          </p>
+        </div>
+        <nav class="sidebar-nav" aria-label="Site navigation">
+          <a class="nav-home" href="../index.html?v=site-20260521"><span><span class="en">Portfolio</span><span class="zh">作品集</span></span></a>
+          <a class="nav-about" href="../about.html?v=site-20260521"><span><span class="en">About Me</span><span class="zh">关于我</span></span></a>
+          <a class="nav-contact" href="../contact.html?v=site-20260521"><span><span class="en">Contact</span><span class="zh">联系</span></span></a>
+        </nav>
+        <div class="sidebar-links">
+          <a class="small-link" href="mailto:Pengbiao.chen@mail.utoronto.ca">Email</a>
+          <a class="small-link" href="https://www.linkedin.com/in/pengbiao-c-1286a42b0/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="small-link" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="small-link" href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+          <a class="small-link" href="../assets/docs/Pengbiao_Jerry_Chen_Resume.pdf"><span class="en">Resume</span><span class="zh">简历</span></a>
+        </div>
+        <div class="controls">
+          <div class="segmented" aria-label="Language">
+            <button type="button" data-lang-button="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang-button="zh" aria-pressed="false">中</button>
+          </div>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+            <span data-theme-label>Dark</span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main">
+        <article>
+          <header class="article-header">
+            <p class="eyebrow">Banking Strategy · Consumer Finance · Marketing Analytics</p>
+            <h2>
+              <span class="en">Involvement Drives Demand</span>
+              <span class="zh">银行个人理财产品营销策略研究</span>
+            </h2>
+            <p>
+              <span class="en">
+                What mattered most was turning a broad marketing topic into measurable customer-behavior variables. The
+                useful part was the chain from survey design to reliability checks, regression evidence, and finally
+                practical recommendations for product, promotion, service, and channels.
+              </span>
+              <span class="zh">
+                重点和心得：这个项目把一个比较宽泛的营销问题，转化成了可以度量的客户行为变量。我的主要收获是学会从问卷设计、信度效度检验走到回归证据，再把结果落到产品、促销、服务和渠道策略建议上。
+              </span>
+            </p>
+            <div class="chips">
+              <span class="chip plum"><span class="en">Banking Strategy</span><span class="zh">银行战略</span></span>
+              <span class="chip"><span class="en">Consumer Finance</span><span class="zh">消费者金融</span></span>
+              <span class="chip gold"><span class="en">Academic Research</span><span class="zh">学术研究</span></span>
+            </div>
+            <div class="article-hero contain">
+              <img src="../assets/img/bank-paper-chart-000.jpg" alt="Bank A personal loan product structure by year">
+            </div>
+          </header>
+
+          <div class="article-body">
+            <nav class="article-toc" aria-label="Article sections">
+              <a href="#question"><span class="en">Question</span><span class="zh">问题</span></a>
+              <a href="#data"><span class="en">Data</span><span class="zh">数据</span></a>
+              <a href="#variables"><span class="en">Variables</span><span class="zh">变量</span></a>
+              <a href="#quality"><span class="en">Quality Tests</span><span class="zh">质量检验</span></a>
+              <a href="#regression"><span class="en">Regression</span><span class="zh">回归</span></a>
+              <a href="#strategy"><span class="en">Strategy</span><span class="zh">策略</span></a>
+            </nav>
+
+            <section id="question" class="article-section">
+              <h2><span class="en">Research Question</span><span class="zh">研究问题</span></h2>
+              <p>
+                <span class="en">
+                  The paper asks why customers choose or avoid a bank's personal finance products when many products look
+                  similar across banks. Instead of treating marketing as only advertising, I model purchase intention as a
+                  function of product usability, perceived usefulness, comparative advantage, perceived risk, service
+                  experience, and customer involvement.
+                </span>
+                <span class="zh">
+                  论文研究的是：当各家银行个人理财产品越来越相似时，客户为什么选择或不选择某家银行。这里没有把营销只理解为广告，而是把购买意愿建模为易用性、感知有用性、比较优势、感知风险、服务体验和客户涉入度的函数。
+                </span>
+              </p>
+              <p class="formula">\[
+                PI_i=\alpha+\beta_1 PE_i+\beta_2 PU_i+\beta_3 CA_i+\beta_4 PR_i+
+                \beta_5 SE_i+\beta_6 PII_i+\gamma Z_i+\varepsilon_i
+              \]</p>
+              <p>
+                <span class="en">
+                  In plain language, the dependent variable is willingness to buy. The explanatory variables describe what
+                  customers feel about the product: whether it is easy to use, useful, different from competitors, low-risk,
+                  well-serviced, and worth paying attention to.
+                </span>
+                <span class="zh">
+                  直观来说，被解释变量是客户购买意愿；解释变量描述客户对产品的感受：是否易用、是否有用、是否有差异化、风险是否可接受、服务体验如何、以及客户是否愿意主动关注。
+                </span>
+              </p>
+            </section>
+
+            <section id="data" class="article-section">
+              <h2><span class="en">Data</span><span class="zh">数据</span></h2>
+              <p>
+                <span class="en">
+                  The empirical part uses a questionnaire survey of Bank A customers in Zhejiang. The questionnaire was
+                  distributed through local contacts and collected from a broad mix of occupations, ages, education levels,
+                  and income groups.
+                </span>
+                <span class="zh">
+                  实证部分使用针对浙江地区 Bank A 客户的问卷调查。问卷通过当地联系人扩散，样本覆盖不同职业、年龄、教育水平和收入群体。
+                </span>
+              </p>
+              <div class="metric-line"><strong>750</strong><span><span class="en">questionnaires submitted.</span><span class="zh">份问卷回收。</span></span></div>
+              <div class="metric-line"><strong>712</strong><span><span class="en">valid questionnaires after cleaning.</span><span class="zh">份有效问卷。</span></span></div>
+              <div class="metric-line"><strong>94.93%</strong><span><span class="en">effective recovery rate.</span><span class="zh">有效回收率。</span></span></div>
+              <div class="metric-line"><strong>84%</strong><span><span class="en">respondents aged 19 to 40, making the sample useful for digital-bank product analysis.</span><span class="zh">受访者年龄在 19-40 岁之间，因此样本适合分析数字银行理财产品。</span></span></div>
+              <table class="article-table">
+                <thead><tr><th>Dimension</th><th>Sample detail</th></tr></thead>
+                <tbody>
+                  <tr><td>Gender</td><td>365 male (51%), 347 female (49%)</td></tr>
+                  <tr><td>Region</td><td>78% from Zhejiang; 67% from Hangzhou provincial-capital area</td></tr>
+                  <tr><td>Education</td><td>51% undergraduate, 29% college, 9% master's, 5% PhD or above</td></tr>
+                  <tr><td>Income</td><td>51% monthly income between RMB 5,000 and 10,000; 27% between RMB 10,000 and 20,000</td></tr>
+                </tbody>
+              </table>
+              <div class="figure-grid">
+                <figure>
+                  <img src="../assets/img/bank-paper-chart-000.jpg" alt="Bank A personal loan product structure by year">
+                  <figcaption><span class="en">Loan-product mix from the Columbia paper, showing the changing share of housing, consumer, and operating loans.</span><span class="zh">论文中的贷款产品结构图，展示住房贷款、消费贷款与经营贷款占比变化。</span></figcaption>
+                </figure>
+                <figure>
+                  <img src="../assets/img/bank-paper-chart-001.jpg" alt="Bank A savings deposit products and growth rate by year">
+                  <figcaption><span class="en">Savings-deposit product scale and growth rate, used as market context for retail financial products.</span><span class="zh">储蓄存款产品规模与增长率，用于补充个人金融产品的市场背景。</span></figcaption>
+                </figure>
+              </div>
+            </section>
+
+            <section id="variables" class="article-section">
+              <h2><span class="en">Variables and Hypotheses</span><span class="zh">变量与假设</span></h2>
+              <p>
+                <span class="en">
+                  The model combines the Technology Acceptance Model with behavioral-finance and consumer-finance framing.
+                  Each construct is measured through Likert-style questionnaire items.
+                </span>
+                <span class="zh">
+                  模型把技术接受模型与行为金融、消费者金融框架结合起来。每个变量都由 Likert 量表题项测量。
+                </span>
+              </p>
+              <ul>
+                <li><span class="en">H1/H2: perceived ease of use and perceived usefulness should increase willingness to purchase.</span><span class="zh">H1/H2：感知易用性和感知有用性应提升购买意愿。</span></li>
+                <li><span class="en">H3: product comparative advantage should increase purchase intention.</span><span class="zh">H3：产品比较优势应提升购买意愿。</span></li>
+                <li><span class="en">H4: perceived risk should reduce willingness; in the questionnaire coding, higher risk-score responses mean lower concern.</span><span class="zh">H4：感知风险会抑制购买意愿；在问卷编码中，较高风险维度分数代表更低担忧。</span></li>
+                <li><span class="en">H5/H6: service experience, satisfaction, and customer involvement should increase purchase intention.</span><span class="zh">H5/H6：服务体验、满意度与客户涉入度应提升购买意愿。</span></li>
+              </ul>
+            </section>
+
+            <section id="quality" class="article-section">
+              <h2><span class="en">Questionnaire Quality Tests</span><span class="zh">问卷质量检验</span></h2>
+              <p>
+                <span class="en">
+                  Before running the regression, the paper checks whether the questionnaire dimensions are reliable enough
+                  to use as explanatory variables.
+                </span>
+                <span class="zh">
+                  在回归之前，论文先检验问卷维度是否具有足够信度与效度，能否作为解释变量使用。
+                </span>
+              </p>
+              <table class="article-table">
+                <thead><tr><th>Construct</th><th>Cronbach's alpha</th><th>Interpretation</th></tr></thead>
+                <tbody>
+                  <tr><td>PE: perceived ease of use</td><td>0.884</td><td>Reliable</td></tr>
+                  <tr><td>PU: perceived usefulness</td><td>0.931</td><td>Reliable</td></tr>
+                  <tr><td>CA: comparative advantage</td><td>0.886</td><td>Reliable</td></tr>
+                  <tr><td>PR: perceived risk</td><td>0.870</td><td>Reliable</td></tr>
+                  <tr><td>SE: service experience and satisfaction</td><td>0.867</td><td>Reliable</td></tr>
+                  <tr><td>PII: involvement</td><td>0.860</td><td>Reliable</td></tr>
+                </tbody>
+              </table>
+              <div class="metric-line"><strong>KMO 0.968</strong><span><span class="en">indicates the variables are suitable for factor analysis.</span><span class="zh">说明变量适合做因子分析。</span></span></div>
+              <div class="metric-line"><strong>Bartlett p = 0.000</strong><span><span class="en">rejects the null that the correlation matrix is an identity matrix.</span><span class="zh">拒绝相关矩阵为单位矩阵的原假设。</span></span></div>
+            </section>
+
+            <section id="regression" class="article-section">
+              <h2><span class="en">Regression Results</span><span class="zh">回归结果</span></h2>
+              <p>
+                <span class="en">
+                  The regression explains purchase intention using demographics and the six questionnaire constructs. The
+                  model fit is high for a survey-based marketing study: R² = 0.855 and adjusted R² = 0.851, with F = 278.595
+                  and p = 0.000.
+                </span>
+                <span class="zh">
+                  回归用人口统计变量和六个问卷维度解释购买意愿。对于问卷型营销研究，模型拟合度较高：R² = 0.855，调整后 R² = 0.851，F = 278.595，p = 0.000。
+                </span>
+              </p>
+              <table class="article-table">
+                <thead><tr><th>Variable</th><th>Coefficient</th><th>t-value</th><th>p-value</th><th>VIF</th></tr></thead>
+                <tbody>
+                  <tr><td>Perceived ease of use</td><td>0.291</td><td>5.495</td><td>0.000</td><td>7.130</td></tr>
+                  <tr><td>Perceived usefulness</td><td>0.176</td><td>3.683</td><td>0.001</td><td>5.805</td></tr>
+                  <tr><td>Comparative advantage</td><td>0.200</td><td>4.529</td><td>0.000</td><td>4.940</td></tr>
+                  <tr><td>Perceived risk score</td><td>0.237</td><td>5.228</td><td>0.000</td><td>5.243</td></tr>
+                  <tr><td>Experience and satisfaction</td><td>0.132</td><td>2.857</td><td>0.007</td><td>5.414</td></tr>
+                  <tr><td>Involvement</td><td>0.334</td><td>5.813</td><td>0.000</td><td>1.395</td></tr>
+                </tbody>
+              </table>
+              <p>
+                <span class="en">
+                  Involvement has the largest coefficient among the main constructs, followed by perceived ease of use and
+                  perceived risk score. That means Bank A should not only redesign products; it also needs to increase how
+                  often customers actively notice, use, and participate in its wealth-management ecosystem.
+                </span>
+                <span class="zh">
+                  在主要解释变量中，涉入度系数最大，其次是感知易用性和感知风险得分。这说明 Bank A 不能只做产品设计，还需要提高客户对理财生态的关注、使用和参与频率。
+                </span>
+              </p>
+            </section>
+
+            <section id="strategy" class="article-section">
+              <h2><span class="en">Strategy Implications</span><span class="zh">策略含义</span></h2>
+              <ul>
+                <li><span class="en">Product strategy: involve innovative customers in product feedback and make product differences more visible.</span><span class="zh">产品策略：让创新型客户参与产品反馈，并让产品差异更清晰可见。</span></li>
+                <li><span class="en">Promotion strategy: segment customers by involvement and income instead of sending one uniform promotion message.</span><span class="zh">促销策略：按涉入度和收入分层，而不是统一推送同一种促销信息。</span></li>
+                <li><span class="en">Service strategy: collect post-service feedback, because experience and satisfaction remain statistically significant.</span><span class="zh">服务策略：加强服务后反馈收集，因为体验和满意度在回归中仍然显著。</span></li>
+                <li><span class="en">Channel strategy: integrate app, branch, and relationship-manager channels into one clearer customer journey.</span><span class="zh">渠道策略：整合 App、网点和客户经理渠道，形成更清晰的客户旅程。</span></li>
+              </ul>
+              <p>
+                <span class="en">Tools: questionnaire design, SPSS-style reliability and validity testing, multiple linear regression, customer segmentation, marketing strategy synthesis.</span>
+                <span class="zh">工具：问卷设计、SPSS 风格信度与效度检验、多元线性回归、客户分层、营销策略整合。</span>
+              </p>
+            </section>
+          </div>
+        </article>
+        <footer class="footer">© 2026 Pengbiao (Jerry) Chen</footer>
+      </main>
+    </div>
+    <script>
+      window.MathJax = {
+        tex: { displayMath: [["\\[", "\\]"], ["$$", "$$"]] },
+        svg: { fontCache: "global" }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>

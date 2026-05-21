@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Bank personal finance marketing research cover</title>
+  <desc id="desc">A clean research-dashboard cover with survey metrics, regression bars, and banking strategy labels.</desc>
+  <rect width="1200" height="760" fill="#fffaf0"/>
+  <rect x="72" y="70" width="1056" height="620" rx="24" fill="#f2eadc" stroke="#d9cdbb"/>
+  <text x="118" y="140" fill="#17201d" font-family="Georgia, 'Times New Roman', serif" font-size="54" font-weight="700">Bank Personal Finance</text>
+  <text x="118" y="198" fill="#17201d" font-family="Georgia, 'Times New Roman', serif" font-size="54" font-weight="700">Marketing Strategy</text>
+  <text x="120" y="246" fill="#65716c" font-family="Inter, Arial, sans-serif" font-size="25">Survey design · reliability tests · multiple regression</text>
+  <g transform="translate(118 315)">
+    <rect width="238" height="150" rx="18" fill="#ffffff" stroke="#d9cdbb"/>
+    <text x="28" y="55" fill="#25745f" font-family="Georgia, 'Times New Roman', serif" font-size="44" font-weight="700">712</text>
+    <text x="28" y="96" fill="#65716c" font-family="Inter, Arial, sans-serif" font-size="22">valid responses</text>
+  </g>
+  <g transform="translate(390 315)">
+    <rect width="238" height="150" rx="18" fill="#ffffff" stroke="#d9cdbb"/>
+    <text x="28" y="55" fill="#b27a35" font-family="Georgia, 'Times New Roman', serif" font-size="44" font-weight="700">0.855</text>
+    <text x="28" y="96" fill="#65716c" font-family="Inter, Arial, sans-serif" font-size="22">model R squared</text>
+  </g>
+  <g transform="translate(662 315)">
+    <rect width="350" height="246" rx="18" fill="#ffffff" stroke="#d9cdbb"/>
+    <text x="28" y="48" fill="#65716c" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">Key drivers</text>
+    <g fill="#25745f">
+      <rect x="34" y="82" width="250" height="22" rx="8"/>
+      <rect x="34" y="126" width="218" height="22" rx="8" opacity=".82"/>
+      <rect x="34" y="170" width="176" height="22" rx="8" opacity=".7"/>
+    </g>
+    <g fill="#65716c" font-family="Inter, Arial, sans-serif" font-size="18">
+      <text x="34" y="78">Involvement</text>
+      <text x="34" y="122">Ease of use</text>
+      <text x="34" y="166">Risk perception</text>
+    </g>
+  </g>
+  <g transform="translate(118 520)" fill="#17201d" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">
+    <rect width="190" height="54" rx="13" fill="#e7d0ec"/>
+    <text x="24" y="35">Banking Strategy</text>
+    <rect x="214" width="176" height="54" rx="13" fill="#d7ebdf"/>
+    <text x="238" y="35">Consumer Finance</text>
+    <rect x="414" width="190" height="54" rx="13" fill="#ead6b7"/>
+    <text x="438" y="35">Marketing Analytics</text>
+  </g>
+</svg>

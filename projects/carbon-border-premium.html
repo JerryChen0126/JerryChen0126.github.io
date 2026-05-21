@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en" data-lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Research note on carbon border risk and equity pricing.">
+    <title>CBAM Transition Risk · Pengbiao (Jerry) Chen</title>
+    <link rel="stylesheet" href="../assets/css/styles.css?v=left-rail-20260521">
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <a class="portrait" href="../index.html?v=site-20260521" aria-label="Home">
+          <picture>
+            <source srcset="../assets/img/jerry-photo-ai-portrait.png" type="image/png">
+            <img src="../assets/img/jerry-photo-ai-portrait.png" alt="Pengbiao Jerry Chen">
+          </picture>
+        </a>
+        <div class="identity">
+          <h1>Jerry Chen</h1>
+          <p>
+            <span class="en">Master of Mathematical Finance student at the University of Toronto, with experience across risk, banking consulting, and empirical finance research.</span>
+            <span class="zh">多伦多大学数学金融硕士在读，具备风险管理、银行科技咨询和实证金融研究经历。</span>
+          </p>
+        </div>
+        <nav class="sidebar-nav" aria-label="Site navigation">
+          <a class="nav-home" href="../index.html?v=site-20260521"><span><span class="en">Portfolio</span><span class="zh">作品集</span></span></a>
+          <a class="nav-about" href="../about.html?v=site-20260521"><span><span class="en">About Me</span><span class="zh">关于我</span></span></a>
+          <a class="nav-contact" href="../contact.html?v=site-20260521"><span><span class="en">Contact</span><span class="zh">联系</span></span></a>
+        </nav>
+        <div class="sidebar-links">
+          <a class="small-link" href="mailto:Pengbiao.chen@mail.utoronto.ca">Email</a>
+          <a class="small-link" href="https://www.linkedin.com/in/pengbiao-c-1286a42b0/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="small-link" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="small-link" href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+          <a class="small-link" href="../assets/docs/Pengbiao_Jerry_Chen_Resume.pdf"><span class="en">Resume</span><span class="zh">简历</span></a>
+        </div>
+        <div class="controls">
+          <div class="segmented" aria-label="Language">
+            <button type="button" data-lang-button="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang-button="zh" aria-pressed="false">中</button>
+          </div>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+            <span data-theme-label>Dark</span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main">
+        <article>
+          <header class="article-header">
+            <p class="eyebrow">Risk Management · Climate Finance · Causal Inference</p>
+            <h2>
+              <span class="en">CBAM Risk Pricing Is Uneven</span>
+              <span class="zh">碳边境溢价研究</span>
+            </h2>
+            <p>
+              <span class="en">
+                What mattered most was turning a policy story into a market-risk test. Instead of asking only whether
+                climate policy matters, I asked where it should matter most: high-carbon firms, EU exposure, and specific
+                CBAM event windows. The average effect is weak, but the heterogeneity is useful for thinking about
+                transition risk.
+              </span>
+              <span class="zh">
+                重点和心得：气候转型风险很容易被简单事件研究夸大，所以我把重点放在分层研究设计上：日内数据、排放强度、SADF 窗口、趋势扫描、OLS/DiD 和因果森林。我的主要收获是，不应该先假设存在一个平均的碳边境溢价，而是要找清楚这个影响集中在哪些公司和哪些事件窗口。
+              </span>
+            </p>
+            <div class="chips">
+              <span class="chip gold"><span class="en">Risk Management</span><span class="zh">风险管理</span></span>
+              <span class="chip accent"><span class="en">Climate Finance</span><span class="zh">气候金融</span></span>
+              <span class="chip plum"><span class="en">Regulatory Risk</span><span class="zh">监管风险</span></span>
+            </div>
+            <div class="article-hero contain">
+              <img src="../assets/img/project-carbon-causal-forest.png" alt="Causal forest heterogeneous treatment effects">
+            </div>
+          </header>
+
+          <div class="article-body">
+            <nav class="article-toc" aria-label="Article sections">
+              <a href="#question"><span class="en">Question</span><span class="zh">问题</span></a>
+              <a href="#data"><span class="en">Data</span><span class="zh">数据</span></a>
+              <a href="#windows"><span class="en">Windows</span><span class="zh">窗口</span></a>
+              <a href="#model"><span class="en">Models</span><span class="zh">模型</span></a>
+              <a href="#results"><span class="en">Results</span><span class="zh">结果</span></a>
+              <a href="#limits"><span class="en">Limits</span><span class="zh">局限</span></a>
+            </nav>
+
+            <section id="question" class="article-section">
+              <h2><span class="en">Research Question</span><span class="zh">研究问题</span></h2>
+              <p>
+                <span class="en">
+                  CBAM is not only an environmental policy. It changes the expected cash-flow cost of selling carbon-intensive
+                  products into Europe. The empirical question is whether equity markets price that transition risk around
+                  major 2023 policy dates, and whether the effect is stronger for firms with higher carbon intensity.
+                </span>
+                <span class="zh">
+                  CBAM 不只是环境政策，它会改变高碳产品进入欧洲市场时的预期现金流成本。实证问题是：股票市场是否在 2023 年关键政策日期附近重新定价这种转型风险，以及这种影响是否随企业碳强度上升而增强。
+                </span>
+              </p>
+              <p class="formula">\[
+                AR_{i,t}=f(EU_i,CI_i,MKT_t,METAL_t,\mathrm{EventWindow}_t)
+              \]</p>
+              <p>
+                <span class="en">
+                  In plain language, I compare abnormal stock returns after removing broad market and metal-sector moves.
+                  Then I check whether EU exposure and carbon intensity explain which firms react more around CBAM news.
+                </span>
+                <span class="zh">
+                  直观来说，我先剔除整体市场和金属行业共同波动，再观察欧盟暴露和碳强度是否能解释哪些公司在 CBAM 消息附近反应更明显。
+                </span>
+              </p>
+            </section>
+
+            <section id="data" class="article-section">
+              <h2><span class="en">Data</span><span class="zh">数据</span></h2>
+              <p>
+                <span class="en">
+                  The project combines issuer-level emissions data with event-window equity prices. The price file starts
+                  with 37 steel and aluminum tickers across EU and non-EU issuers, while the emissions file contains 40
+                  issuer records with Scope 1, Scope 2, revenue, country, region, and sector fields.
+                </span>
+                <span class="zh">
+                  这个项目把发行人层面的排放数据和事件窗口股票价格合并。价格文件包含 37 个欧盟与非欧盟钢铁/铝业 ticker，排放文件包含 40 条发行人记录，字段包括 Scope 1、Scope 2、收入、国家、地区和行业。
+                </span>
+              </p>
+              <div class="metric-line"><strong>1,621</strong><span><span class="en">raw event-price rows across three policy windows.</span><span class="zh">条原始事件窗口价格记录，覆盖三个政策窗口。</span></span></div>
+              <div class="metric-line"><strong>12 / 37</strong><span><span class="en">tickers matched to First Rate Data 1-minute bars; 25 had no FRD coverage.</span><span class="zh">个 ticker 匹配到 First Rate Data 1 分钟数据；25 个没有 FRD 覆盖。</span></span></div>
+              <div class="metric-line"><strong>462</strong><span><span class="en">final panel observations after return cleaning and control-variable merge.</span><span class="zh">清洗收益并合并控制变量后的最终面板观测数。</span></span></div>
+              <div class="metric-line"><strong>4,332</strong><span><span class="en">realized-volatility rows built from intraday data.</span><span class="zh">由日内数据计算出的实现波动率记录。</span></span></div>
+              <h3><span class="en">Controls</span><span class="zh">控制变量</span></h3>
+              <ul>
+                <li><span class="en">MarketRet is a broad market control; MetalRet proxies common commodity/metal-sector moves.</span><span class="zh">MarketRet 控制整体市场波动；MetalRet 代理金属/大宗商品行业共同波动。</span></li>
+                <li><span class="en">Carbon intensity is derived from emissions and revenue; log revenue controls for issuer scale.</span><span class="zh">碳强度由排放与收入计算；收入取对数用于控制企业规模。</span></li>
+                <li><span class="en">Returns are winsorized in the SADF window: raw daily returns range from -7.92% to 8.77%, while winsorized returns range from -6.01% to 4.96%.</span><span class="zh">SADF 窗口内对收益做缩尾：原始日收益范围为 -7.92% 至 8.77%，缩尾后为 -6.01% 至 4.96%。</span></li>
+              </ul>
+            </section>
+
+            <section id="windows" class="article-section">
+              <h2><span class="en">Event Windows and Signals</span><span class="zh">事件窗口与信号</span></h2>
+              <p>
+                <span class="en">
+                  I do not simply run one wide event window. The notebook first constructs three 2023 CBAM windows, then
+                  uses SADF-style diagnostics and trend scanning to identify local price regimes inside those windows.
+                </span>
+                <span class="zh">
+                  我没有只跑一个宽泛事件窗口，而是先构建三个 2023 年 CBAM 政策窗口，再用 SADF 风格诊断和趋势扫描识别窗口内部的局部价格状态。
+                </span>
+              </p>
+              <table class="article-table">
+                <thead><tr><th>Window</th><th>Label</th><th>Purpose</th></tr></thead>
+                <tbody>
+                  <tr><td>2023-04-08 to 2023-04-28</td><td>April 2023 trilogue</td><td>Early policy-negotiation shock</td></tr>
+                  <tr><td>2023-05-07 to 2023-05-27</td><td>May 2023 delegated act</td><td>Implementation-detail shock</td></tr>
+                  <tr><td>2023-09-21 to 2023-10-11</td><td>October 2023 launch</td><td>Launch-period market reaction</td></tr>
+                </tbody>
+              </table>
+              <div class="metric-line"><strong>33</strong><span><span class="en">ticker-window pairs with computed SADF windows.</span><span class="zh">组 ticker-window 成功计算 SADF 窗口。</span></span></div>
+              <div class="metric-line"><strong>8 days / 6 bars</strong><span><span class="en">median SADF window length.</span><span class="zh">SADF 窗口长度中位数。</span></span></div>
+              <div class="metric-line"><strong>186</strong><span><span class="en">observations inside SADF regimes.</span><span class="zh">落在 SADF 状态内的观测数。</span></span></div>
+            </section>
+
+            <section id="model" class="article-section">
+              <h2><span class="en">Models</span><span class="zh">模型</span></h2>
+              <h3><span class="en">SADF-window OLS</span><span class="zh">SADF 窗口 OLS</span></h3>
+              <p class="formula">\[
+                AR_{i,t}=\alpha+\beta_1 EU_i+\beta_2 CI_i+\beta_3(EU_i\times CI_i)
+                +\gamma_1 MKT_t+\gamma_2 METAL_t+\gamma_3\log(Revenue_i)+\varepsilon_{i,t}
+              \]</p>
+              <p>
+                <span class="en">
+                  This specification asks whether EU/non-EU location changes the carbon-intensity slope after controlling
+                  for broad market and metal-sector moves.
+                </span>
+                <span class="zh">
+                  这个模型检验在控制市场与金属行业共同波动后，欧盟/非欧盟身份是否改变碳强度对异常收益的影响斜率。
+                </span>
+              </p>
+              <h3><span class="en">Trend scanning</span><span class="zh">趋势扫描</span></h3>
+              <p class="formula">\[
+                TrendT_{i,w}=\alpha+\beta_1 EU_i+\beta_2 CI_i+\gamma_1 MKT_w+
+                \gamma_2 METAL_w+\delta_{\mathrm{event}}+\varepsilon_{i,w}
+              \]</p>
+              <p>
+                <span class="en">
+                  Trend scanning converts each event window into a local t-statistic that measures the strongest forward
+                  price trend over 3 to 11 bars.
+                </span>
+                <span class="zh">
+                  趋势扫描把每个事件窗口转化为一个局部 t 值，用于衡量未来 3 到 11 个 bar 中最强的价格趋势。
+                </span>
+              </p>
+              <h3><span class="en">Causal layer</span><span class="zh">因果层</span></h3>
+              <p>
+                <span class="en">
+                  The causal layer uses a DAG, propensity-score matching, and a causal forest to test whether the estimated
+                  CBAM exposure effect varies nonlinearly with carbon intensity.
+                </span>
+                <span class="zh">
+                  因果层使用 DAG、倾向得分匹配和因果森林，检验 CBAM 暴露效应是否随碳强度呈非线性变化。
+                </span>
+              </p>
+            </section>
+
+            <section id="results" class="article-section">
+              <h2><span class="en">Results</span><span class="zh">结果</span></h2>
+              <table class="article-table">
+                <thead><tr><th>Test</th><th>Main statistic</th><th>Reading</th></tr></thead>
+                <tbody>
+                  <tr><td>DiD-style OLS</td><td>EU_Flag:Post = 0.00025, p = 0.855</td><td>No clean average treatment effect in the broad daily panel.</td></tr>
+                  <tr><td>SADF OLS</td><td>EU × CarbonIntensity = 5.0338, p = 0.375</td><td>Directional interaction, but not statistically significant.</td></tr>
+                  <tr><td>Non-EU CAR regression</td><td>CarbonIntensity = -18.6632, p = 0.248</td><td>Higher carbon intensity is directionally more negative for non-EU names.</td></tr>
+                  <tr><td>Trend regression</td><td>Full-sample EU coefficient = 5.8951, p = 0.126</td><td>Suggestive, but below conventional significance.</td></tr>
+                  <tr><td>Propensity-score matching</td><td>Estimate = 2.9848</td><td>Causal estimate is positive in the trend-t-stat outcome scale.</td></tr>
+                </tbody>
+              </table>
+              <p>
+                <span class="en">
+                  The more useful output is not a single p-value. The pattern is that broad OLS is weak, while the
+                  event-regime and causal-forest layers point to heterogeneous effects. That is consistent with a
+                  transition-risk interpretation, but the evidence is event-specific.
+                </span>
+                <span class="zh">
+                  最有价值的并不是单个 p 值，而是不同模型之间的结构：宽口径 OLS 较弱，但事件状态和因果森林层显示出异质性影响。这与转型风险解释一致，但证据仍然是事件驱动的。
+                </span>
+              </p>
+              <div class="figure-grid">
+              <figure>
+                <img src="../assets/img/project-carbon-feature-importance.png" alt="Feature importance chart">
+                <figcaption><span class="en">Feature importance from the risk model.</span><span class="zh">风险模型中的特征重要性。</span></figcaption>
+              </figure>
+              <figure>
+                <img src="../assets/img/project-carbon-sadf-curve.png" alt="SADF curve">
+                <figcaption><span class="en">SADF-style structural break signal.</span><span class="zh">SADF 风格结构断点信号。</span></figcaption>
+              </figure>
+              </div>
+              <div class="figure-grid">
+                <figure>
+                  <img src="../assets/img/project-carbon-causal-forest.png" alt="Causal forest heterogeneous treatment effects">
+                  <figcaption><span class="en">Causal forest view of heterogeneous treatment effects across carbon intensity.</span><span class="zh">因果森林展示碳强度维度上的异质处理效应。</span></figcaption>
+                </figure>
+                <figure>
+                  <img src="../assets/img/project-carbon-causal-dag.png" alt="Causal graph">
+                  <figcaption><span class="en">Causal graph used to frame the adjustment set.</span><span class="zh">用于确定调整变量集合的因果图。</span></figcaption>
+                </figure>
+              </div>
+            </section>
+
+            <section id="limits" class="article-section">
+              <h2><span class="en">Robustness and Limits</span><span class="zh">稳健性与局限</span></h2>
+              <ul>
+                <li><span class="en">Random forest trend-sign classification reaches 70% accuracy, but recall for the positive class is 0.00 on a small 10-observation test set.</span><span class="zh">随机森林趋势方向分类准确率为 70%，但测试集只有 10 个观测，且正类 recall 为 0.00。</span></li>
+                <li><span class="en">Jackknife results keep the EU trend coefficient mostly positive, but several leave-one-ticker estimates are not significant.</span><span class="zh">Jackknife 结果中 EU 趋势系数大多保持正向，但多个剔除单一 ticker 后的估计并不显著。</span></li>
+                <li><span class="en">The sample is concentrated in steel and aluminum, so the result should not be generalized to all climate-policy events.</span><span class="zh">样本集中在钢铁和铝业，因此不能直接推广到所有气候政策事件。</span></li>
+                <li><span class="en">Tools: Python, Pandas, statsmodels, scikit-learn, DoWhy, EconML, LightGBM, XGBoost, SHAP, RiskLabAI.</span><span class="zh">工具：Python、Pandas、statsmodels、scikit-learn、DoWhy、EconML、LightGBM、XGBoost、SHAP、RiskLabAI。</span></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <footer class="footer">© 2026 Pengbiao (Jerry) Chen</footer>
+      </main>
+    </div>
+    <script>
+      window.MathJax = {
+        tex: { displayMath: [["\\[", "\\]"], ["$$", "$$"]] },
+        svg: { fontCache: "global" }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>

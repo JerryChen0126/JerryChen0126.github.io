@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en" data-lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Research note on meme-driven volatility as a priced risk factor.">
+    <title>Meme Volatility Risk Spread · Pengbiao (Jerry) Chen</title>
+    <link rel="stylesheet" href="../assets/css/styles.css?v=left-rail-20260521">
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <a class="portrait" href="../index.html?v=site-20260521" aria-label="Home">
+          <picture>
+            <source srcset="../assets/img/jerry-photo-ai-portrait.png" type="image/png">
+            <img src="../assets/img/jerry-photo-ai-portrait.png" alt="Pengbiao Jerry Chen">
+          </picture>
+        </a>
+        <div class="identity">
+          <h1>Jerry Chen</h1>
+          <p>
+            <span class="en">Master of Mathematical Finance student at the University of Toronto, with experience across risk, banking consulting, and empirical finance research.</span>
+            <span class="zh">多伦多大学数学金融硕士在读，具备风险管理、银行科技咨询和实证金融研究经历。</span>
+          </p>
+        </div>
+        <nav class="sidebar-nav" aria-label="Site navigation">
+          <a class="nav-home" href="../index.html?v=site-20260521"><span><span class="en">Portfolio</span><span class="zh">作品集</span></span></a>
+          <a class="nav-about" href="../about.html?v=site-20260521"><span><span class="en">About Me</span><span class="zh">关于我</span></span></a>
+          <a class="nav-contact" href="../contact.html?v=site-20260521"><span><span class="en">Contact</span><span class="zh">联系</span></span></a>
+        </nav>
+        <div class="sidebar-links">
+          <a class="small-link" href="mailto:Pengbiao.chen@mail.utoronto.ca">Email</a>
+          <a class="small-link" href="https://www.linkedin.com/in/pengbiao-c-1286a42b0/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="small-link" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="small-link" href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+          <a class="small-link" href="../assets/docs/Pengbiao_Jerry_Chen_Resume.pdf"><span class="en">Resume</span><span class="zh">简历</span></a>
+        </div>
+        <div class="controls">
+          <div class="segmented" aria-label="Language">
+            <button type="button" data-lang-button="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang-button="zh" aria-pressed="false">中</button>
+          </div>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+            <span data-theme-label>Dark</span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main">
+        <article>
+          <header class="article-header">
+            <p class="eyebrow">Quantitative Research · Asset Pricing · Portfolio Sorting</p>
+            <h2>
+              <span class="en">Meme Volatility Spread Is Fragile</span>
+              <span class="zh">Meme 驱动波动率作为定价风险因子</span>
+            </h2>
+            <p>
+              <span class="en">
+                What mattered most was not just finding a return spread. I learned how a factor idea has to become a full
+                test: clean intraday data, define the signal, estimate exposure before the test window, sort portfolios out
+                of sample, and then stress the result with controls. The signal is interesting, but the short event window
+                keeps it from being a trading claim.
+              </span>
+              <span class="zh">
+                重点和心得：这个项目最有价值的部分不是简单找 alpha，而是完整搭建了一条因子研究流程：从 1 分钟行情到实现波动率，再到 MDV beta 估计和样本外组合排序。我的主要收获是，一个看起来合理的风险因子，一旦加入市场控制、CPCV 和小样本稳健性检验，就会变得更难被严谨地证明。
+              </span>
+            </p>
+            <div class="chips">
+              <span class="chip accent"><span class="en">Quant Research</span><span class="zh">量化研究</span></span>
+              <span class="chip"><span class="en">Behavioral Finance</span><span class="zh">行为金融</span></span>
+              <span class="chip plum"><span class="en">Portfolio Sorting</span><span class="zh">组合排序</span></span>
+            </div>
+            <div class="article-hero contain">
+              <img src="../assets/img/project-meme-cumulative-returns.png" alt="Cumulative returns by MDV exposure group">
+            </div>
+          </header>
+
+          <div class="article-body">
+            <nav class="article-toc" aria-label="Article sections">
+              <a href="#question"><span class="en">Question</span><span class="zh">问题</span></a>
+              <a href="#data"><span class="en">Data</span><span class="zh">数据</span></a>
+              <a href="#factor"><span class="en">Factor</span><span class="zh">因子</span></a>
+              <a href="#test"><span class="en">Test</span><span class="zh">检验</span></a>
+              <a href="#results"><span class="en">Results</span><span class="zh">结果</span></a>
+              <a href="#robustness"><span class="en">Robustness</span><span class="zh">稳健性</span></a>
+            </nav>
+
+            <section id="question" class="article-section">
+              <h2><span class="en">Research Question</span><span class="zh">研究问题</span></h2>
+              <p>
+                <span class="en">
+                  I wanted to separate a media story from a risk-pricing story. The media story is that names such as
+                  BBBY, GME, AMC, KOSS, and BB moved violently during retail trading episodes. The risk-pricing question is
+                  narrower: if I construct a volatility factor from those names, do other stocks with higher exposure to
+                  that factor subsequently earn different returns?
+                </span>
+                <span class="zh">
+                  我想把“媒体事件”和“风险定价问题”分开。媒体层面是 BBBY、GME、AMC、KOSS、BB 等股票在散户交易事件中剧烈波动；真正的定量问题是：如果用这些股票构造一个波动率因子，其他股票对该因子的暴露是否能解释之后的收益差异。
+                </span>
+              </p>
+              <p class="formula">\[
+                R_{i,t}=\alpha_i+\beta_{i,\mathrm{MDV}}\Delta \mathrm{MDV}_t+\varepsilon_{i,t}
+              \]</p>
+              <p>
+                <span class="en">
+                  In plain language, beta is the stock's sensitivity to the meme-volatility shock. A high beta means the
+                  stock tends to move more when the meme-volatility factor jumps. I estimate that sensitivity first, then
+                  use it to form portfolios later.
+                </span>
+                <span class="zh">
+                  核心变量是 beta_i,MDV。我先在样本前半段估计每只股票的 MDV 暴露，再按暴露排序，在样本后半段做样本外组合检验。
+                </span>
+              </p>
+            </section>
+
+            <section id="data" class="article-section">
+              <h2><span class="en">Data</span><span class="zh">数据</span></h2>
+              <p>
+                <span class="en">
+                  The project uses First Rate Data 1-minute bars rather than daily-only prices. The research window is
+                  July 1, 2022 to September 30, 2022, which gives 64 daily observations after resampling.
+                </span>
+                <span class="zh">
+                  这个项目使用 First Rate Data 的 1 分钟级别行情，而不是只用日频价格。研究窗口为 2022 年 7 月 1 日至 2022 年 9 月 30 日，重采样后得到 64 个日频观测。
+                </span>
+              </p>
+              <div class="metric-line"><strong>29</strong><span><span class="en">tickers loaded, including meme names, test equities, SPY, SPX, and VIX.</span><span class="zh">个 ticker 被载入，包括 meme 参考股票、测试股票、SPY、SPX 和 VIX。</span></span></div>
+              <div class="metric-line"><strong>64 x 29</strong><span><span class="en">daily price and volume panels after cleaning.</span><span class="zh">清洗后的日频价格和成交量面板维度。</span></span></div>
+              <div class="metric-line"><strong>AMC 49,603</strong><span><span class="en">minute bars loaded for AMC; BBBY had 25,395, GME 34,330, KOSS 6,522, and BB 26,609.</span><span class="zh">AMC 有 49,603 条分钟数据；BBBY 为 25,395，GME 为 34,330，KOSS 为 6,522，BB 为 26,609。</span></span></div>
+              <h3><span class="en">Universe</span><span class="zh">股票池</span></h3>
+              <ul>
+                <li><span class="en">Reference meme basket: AMC, BBBY, GME, KOSS, BB.</span><span class="zh">Meme 参考组合：AMC、BBBY、GME、KOSS、BB。</span></li>
+                <li><span class="en">Test/control names: AAPL, AMD, AMZN, NVDA, TSLA, MSFT, BAC, CVX, DIS, GOOGL, IBM, JNJ, JPM, KO, META, NFLX, NKE, ORCL, PFE, WMT, XOM, plus SPY/SPX/VIX controls.</span><span class="zh">测试与控制股票包括 AAPL、AMD、AMZN、NVDA、TSLA、MSFT、BAC、CVX、DIS、GOOGL、IBM、JNJ、JPM、KO、META、NFLX、NKE、ORCL、PFE、WMT、XOM，以及 SPY/SPX/VIX 控制变量。</span></li>
+              </ul>
+            </section>
+
+            <section id="factor" class="article-section">
+              <h2><span class="en">Factor Construction</span><span class="zh">因子构造</span></h2>
+              <p>
+                <span class="en">
+                  For each meme stock, I compute 1-minute log returns and aggregate squared intraday returns into daily
+                  realized volatility. The MDV factor is the equal-weighted average of realized volatility across the five
+                  meme names. The regression uses the daily change in this factor.
+                </span>
+                <span class="zh">
+                  对每只 meme 股票，我先计算 1 分钟对数收益，再把日内平方收益加总成日度实现波动率。MDV 因子是五只 meme 股票实现波动率的等权平均，回归中使用该因子的日度变化。
+                </span>
+              </p>
+              <p class="formula">\[
+                RV_{i,d}=\sqrt{\sum_{m=1}^{M} r_{i,m,d}^{2}},\quad
+                \mathrm{MDV}_d=\frac{1}{5}\sum_{j\in\mathcal{M}} RV_{j,d}
+              \]</p>
+              <p>
+                <span class="en">
+                  I also built a RiskLabAI version with dollar bars and fixed-width fractional differentiation. The dollar
+                  bar thresholds scale with average daily dollar volume, so a liquid stock such as AMC uses a much larger
+                  threshold than KOSS.
+                </span>
+                <span class="zh">
+                  我还做了 RiskLabAI 版本：使用 dollar bars 和固定宽度分数差分。Dollar bar 的阈值随平均日成交金额调整，所以 AMC 这类高流动性股票的阈值明显高于 KOSS。
+                </span>
+              </p>
+              <table class="article-table">
+                <thead><tr><th>Step</th><th>Implementation detail</th><th>Output</th></tr></thead>
+                <tbody>
+                  <tr><td>Dollar bars</td><td>Threshold = average daily dollar volume / 50</td><td>AMC 3,736 bars; BBBY 3,286; GME 3,579; KOSS 1,505; BB 3,666</td></tr>
+                  <tr><td>FFD</td><td>Fixed-width fractional differentiation on meme bar-price index</td><td>d* = 1.0</td></tr>
+                  <tr><td>Meta-labeling</td><td>CUSUM events, 10-day vertical barrier, 0.5/0.5 profit-taking and stop-loss</td><td>31 events; 30 clean rows; 43.33% positive labels</td></tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section id="test" class="article-section">
+              <h2><span class="en">Portfolio Test</span><span class="zh">组合检验</span></h2>
+              <p>
+                <span class="en">
+                  The sample is split at August 15, 2022. Betas are estimated from July 1 to August 15, then the stocks are
+                  sorted into five groups and evaluated from August 16 to September 30. The long-short portfolio is
+                  low-MDV-beta minus high-MDV-beta.
+                </span>
+                <span class="zh">
+                  样本以 2022 年 8 月 15 日为分割点。7 月 1 日至 8 月 15 日用于估计 beta，8 月 16 日至 9 月 30 日用于样本外组合检验。多空组合为低 MDV beta 组减高 MDV beta 组。
+                </span>
+              </p>
+              <p class="code-line">split_date = 2022-08-15; group = qcut(beta_MDV, 5); Low-High = Group1 - Group5</p>
+            </section>
+
+            <section id="results" class="article-section">
+              <h2><span class="en">Results</span><span class="zh">结果</span></h2>
+              <table class="article-table">
+                <thead><tr><th>Portfolio</th><th>Mean (%)</th><th>Std (%)</th><th>t-stat</th></tr></thead>
+                <tbody>
+                  <tr><td>Group 1: lowest MDV beta</td><td>-0.62</td><td>1.92</td><td>-1.85</td></tr>
+                  <tr><td>Group 2</td><td>-0.66</td><td>1.90</td><td>-2.01</td></tr>
+                  <tr><td>Group 3</td><td>-0.47</td><td>1.75</td><td>-1.54</td></tr>
+                  <tr><td>Group 4</td><td>-0.43</td><td>1.20</td><td>-2.04</td></tr>
+                  <tr><td>Group 5: highest MDV beta</td><td>-1.31</td><td>3.76</td><td>-2.01</td></tr>
+                  <tr><td>Low-High</td><td>0.70</td><td>3.02</td><td>1.32</td></tr>
+                </tbody>
+              </table>
+              <p>
+                <span class="en">
+                  The low-beta side lost less than the high-beta side during the out-of-sample window, producing a
+                  positive low-minus-high spread. The result is economically visible but statistically weak, so I read it
+                  as a directional signal rather than a tradable claim.
+                </span>
+                <span class="zh">
+                  样本外窗口中，低 beta 组下跌幅度小于高 beta 组，因此低减高组合为正。这个结果有经济含义，但统计显著性偏弱，所以我把它理解为方向性信号，而不是可直接交易的结论。
+                </span>
+              </p>
+              <figure>
+                <img src="../assets/img/project-meme-cumulative-returns.png" alt="Cumulative returns by MDV exposure group">
+                <figcaption><span class="en">Out-of-sample cumulative returns by MDV beta group.</span><span class="zh">按 MDV beta 分组的样本外累计收益。</span></figcaption>
+              </figure>
+            </section>
+
+            <section id="robustness" class="article-section">
+              <h2><span class="en">Robustness and Limits</span><span class="zh">稳健性与局限</span></h2>
+              <ul>
+                <li><span class="en">Cross-sectional pricing regression gives gamma = -0.0043, t = -1.00, p = 0.325, R² = 0.04, and Spearman correlation = -0.27.</span><span class="zh">横截面定价回归得到 gamma = -0.0043，t = -1.00，p = 0.325，R² = 0.04，Spearman 相关为 -0.27。</span></li>
+                <li><span class="en">Adding market and VIX controls does not fully reshuffle exposures: beta-rank correlations are 0.90 for MDV + market and 0.86 for MDV + market + VIX.</span><span class="zh">加入市场和 VIX 控制后，暴露排序没有完全重排：MDV+市场的 beta 排名相关为 0.90，MDV+市场+VIX 为 0.86。</span></li>
+                <li><span class="en">The market-control low-minus-high mean is 0.75% with t = 1.40.</span><span class="zh">加入市场控制后的低减高组合均值为 0.75%，t 值为 1.40。</span></li>
+                <li><span class="en">A random forest volatility-decay classifier reaches 0.483 accuracy and 0.488 ROC AUC, which is close to noise and prevents overclaiming.</span><span class="zh">随机森林波动衰减分类器准确率为 0.483，ROC AUC 为 0.488，接近噪声，因此不能过度解读。</span></li>
+                <li><span class="en">Combinatorial purged CV reports a negative mean Sharpe and near-zero DSR probability, which is a useful warning about small-sample fragility.</span><span class="zh">组合式 purged CV 得到负的平均 Sharpe 和接近 0 的 DSR 概率，说明小样本结果比较脆弱。</span></li>
+              </ul>
+              <p>
+                <span class="en">Tools: Python, Pandas, NumPy, statsmodels, scikit-learn, RiskLabAI, Matplotlib.</span>
+                <span class="zh">工具：Python、Pandas、NumPy、statsmodels、scikit-learn、RiskLabAI、Matplotlib。</span>
+              </p>
+            </section>
+          </div>
+        </article>
+        <footer class="footer">© 2026 Pengbiao (Jerry) Chen</footer>
+      </main>
+    </div>
+    <script>
+      window.MathJax = {
+        tex: { displayMath: [["\\[", "\\]"], ["$$", "$$"]] },
+        svg: { fontCache: "global" }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>
