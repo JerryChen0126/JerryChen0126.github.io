@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en" data-lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Project note on algorithmic asset management with OLS-MVO backtesting.">
+    <title>Algorithmic Asset Management · Jerry Chen</title>
+    <link rel="stylesheet" href="../assets/css/styles.css?v=left-rail-20260524">
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <a class="portrait" href="../index.html?v=site-20260524" aria-label="Home">
+          <picture>
+            <source srcset="../assets/img/jerry-photo-ai-portrait.png" type="image/png">
+            <img src="../assets/img/jerry-photo-ai-portrait.png" alt="Jerry Chen">
+          </picture>
+        </a>
+        <div class="identity">
+          <h1>Jerry Chen</h1>
+          <p>
+            <span class="en">Master of Mathematical Finance student at the University of Toronto, with experience across risk, banking consulting, and empirical finance research.</span>
+            <span class="zh">多伦多大学数学金融硕士在读，具备风险管理、银行科技咨询和实证金融研究经历。</span>
+          </p>
+        </div>
+        <nav class="sidebar-nav" aria-label="Site navigation">
+          <a class="nav-home" href="../index.html?v=site-20260524"><span><span class="en">Portfolio</span><span class="zh">作品集</span></span></a>
+          <a class="nav-about" href="../about.html?v=site-20260524"><span><span class="en">About Me</span><span class="zh">关于我</span></span></a>
+          <a class="nav-contact" href="../contact.html?v=site-20260524"><span><span class="en">Contact</span><span class="zh">联系</span></span></a>
+        </nav>
+        <div class="sidebar-links">
+          <a class="small-link" href="mailto:Pengbiao.chen@mail.utoronto.ca">Email</a>
+          <a class="small-link" href="https://www.linkedin.com/in/pengbiao-c-1286a42b0/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="small-link" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="small-link" href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+          <a class="small-link" href="../assets/docs/Pengbiao_Jerry_Chen_Resume.pdf"><span class="en">Resume</span><span class="zh">简历</span></a>
+        </div>
+        <div class="controls">
+          <div class="segmented" aria-label="Language">
+            <button type="button" data-lang-button="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang-button="zh" aria-pressed="false">中</button>
+          </div>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+            <span data-theme-label>Dark</span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main">
+        <article>
+          <header class="article-header">
+            <p class="eyebrow">Portfolio Construction · Backtesting · Risk Control</p>
+            <h2>
+              <span class="en">OLS-MVO Doubles Wealth in Backtest</span>
+              <span class="zh">OLS-MVO 回测中将组合价值翻倍</span>
+            </h2>
+            <p>
+              <span class="en">
+                This project was less about inventing a complicated signal and more about building a reusable asset-management loop. I used factor regression to estimate portfolio inputs, optimized a long-only allocation, rebalanced every six months, and checked whether the resulting wealth path and turnover were reasonable.
+              </span>
+              <span class="zh">
+                重点和心得：这个项目不是为了堆复杂信号，而是把资产管理流程写成一个可以重复运行的框架。我用因子回归估计投资组合输入，再用 long-only MVO 优化权重，每半年再平衡，并检查财富路径和换手率是否合理。
+              </span>
+            </p>
+            <div class="chips">
+              <span class="chip gold">Portfolio Construction</span>
+              <span class="chip accent">Backtesting</span>
+              <span class="chip">Factor Regression</span>
+              <span class="chip plum">Turnover</span>
+            </div>
+            <div class="article-hero contain">
+              <img src="../assets/img/project-algo-mvo-wealth.png" alt="Backtested OLS-MVO portfolio wealth evolution">
+            </div>
+          </header>
+
+          <nav class="article-toc" aria-label="Project sections">
+            <a href="#question">Question</a>
+            <a href="#data">Data</a>
+            <a href="#method">Method</a>
+            <a href="#results">Results</a>
+            <a href="#takeaway">Takeaway</a>
+          </nav>
+
+          <div class="article-body">
+            <section id="question" class="article-section">
+              <h2>
+                <span class="en">Research Question</span>
+                <span class="zh">研究问题</span>
+              </h2>
+              <p>
+                <span class="en">
+                  The task was to design an algorithmic asset-management strategy that can be evaluated on different datasets. My version uses a factor-based return model and a constrained optimizer, then tests the strategy through a rolling portfolio simulation.
+                </span>
+                <span class="zh">
+                  这个任务是设计一个可以在不同数据集上被评估的算法资产管理策略。我的版本使用因子模型估计收益和风险，再通过约束优化器生成权重，并用滚动回测检验组合表现。
+                </span>
+              </p>
+            </section>
+
+            <section id="data" class="article-section">
+              <h2>Data</h2>
+              <p>
+                <span class="en">
+                  I tested the strategy on the third project dataset: 33 assets with monthly adjusted prices from December 1999 to December 2014, plus eight factor returns and a risk-free rate. The out-of-sample period begins after the first five years of history, and the portfolio is rebalanced every six months.
+                </span>
+                <span class="zh">
+                  我使用第三组项目数据进行测试：33 个资产，月度复权价格覆盖 1999 年 12 月到 2014 年 12 月，并配套八个因子收益和无风险利率。样本外回测从前五年历史之后开始，组合每六个月再平衡一次。
+                </span>
+              </p>
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Setup</th>
+                    <th>Role in the backtest</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Assets</td>
+                    <td>33 assets</td>
+                    <td>The optimizer allocates across all available assets.</td>
+                  </tr>
+                  <tr>
+                    <td>Factors</td>
+                    <td>Eight systematic factors plus RF</td>
+                    <td>Factor returns are used to estimate expected returns and covariance.</td>
+                  </tr>
+                  <tr>
+                    <td>Estimation window</td>
+                    <td>Most recent 36 months</td>
+                    <td>Keeps the input estimates responsive without using only the latest few observations.</td>
+                  </tr>
+                  <tr>
+                    <td>Rebalance rule</td>
+                    <td>Every six months</td>
+                    <td>Lets the portfolio update while keeping turnover measurable.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section id="method" class="article-section">
+              <h2>
+                <span class="en">Method</span>
+                <span class="zh">方法</span>
+              </h2>
+              <p>
+                <span class="en">
+                  The strategy first converts prices into excess returns, then estimates a factor model using the most recent 36 observations. The fitted model gives an expected return vector and covariance matrix for the optimizer.
+                </span>
+                <span class="zh">
+                  策略先把价格转换为超额收益，然后用最近 36 个月的数据估计因子模型。模型输出预期收益向量和协方差矩阵，作为优化器的输入。
+                </span>
+              </p>
+              <div class="formula">
+                \[
+                  R_t = \frac{P_t}{P_{t-1}} - 1,\qquad R^e_t = R_t - r_{f,t}
+                \]
+              </div>
+              <div class="formula">
+                \[
+                  R^e_{i,t} = \alpha_i + \beta_i^\top f_t + \epsilon_{i,t}
+                \]
+              </div>
+              <p>
+                <span class="en">
+                  The portfolio step is long-only. I used the average estimated asset return as the target return, then minimized estimated variance under full-investment and non-negative-weight constraints.
+                </span>
+                <span class="zh">
+                  投资组合优化是 long-only 的。我把平均估计收益作为目标收益，在满仓和非负权重约束下最小化组合方差。
+                </span>
+              </p>
+              <div class="formula">
+                \[
+                  \min_x \frac{1}{2}x^\top Qx
+                  \quad \text{s.t.} \quad
+                  \mu^\top x \ge \bar{\mu},\quad
+                  \mathbf{1}^\top x = 1,\quad
+                  x \ge 0
+                \]
+              </div>
+              <p>
+                <span class="en">
+                  Turnover is tracked after each rebalance so the result is not judged only by the ending wealth.
+                </span>
+                <span class="zh">
+                  每次再平衡后都会记录换手率，因此结果不只看最终财富，也看策略交易是否过于激进。
+                </span>
+              </p>
+              <div class="formula">
+                \[
+                  \text{Turnover}_t = \sum_i \left|x_{i,t} - x^{\text{before}}_{i,t}\right|
+                \]
+              </div>
+            </section>
+
+            <section id="results" class="article-section">
+              <h2>
+                <span class="en">Results</span>
+                <span class="zh">结果</span>
+              </h2>
+              <div class="metric-line">
+                <strong>$226,886.79</strong>
+                <span>
+                  <span class="en">Final wealth from an initial $100,000.</span>
+                  <span class="zh">初始资金 $100,000，最终组合价值达到 $226,886.79。</span>
+                </span>
+              </div>
+              <div class="metric-line">
+                <strong>126.89%</strong>
+                <span>
+                  <span class="en">Total return over the out-of-sample backtest.</span>
+                  <span class="zh">样本外回测总收益率。</span>
+                </span>
+              </div>
+              <div class="metric-line">
+                <strong>0.1928</strong>
+                <span>
+                  <span class="en">Reported excess-return Sharpe ratio from the project notebook.</span>
+                  <span class="zh">项目 notebook 中计算得到的超额收益 Sharpe ratio。</span>
+                </span>
+              </div>
+              <div class="metric-line">
+                <strong>0.5501</strong>
+                <span>
+                  <span class="en">Average turnover across rebalances.</span>
+                  <span class="zh">每次再平衡的平均换手率。</span>
+                </span>
+              </div>
+              <figure>
+                <img src="../assets/img/project-algo-mvo-weights.png" alt="Backtested portfolio weights by rebalance period">
+                <figcaption>
+                  <span class="en">Portfolio weights across 20 rebalance periods. The strategy holds multiple active assets rather than collapsing into a single-name bet.</span>
+                  <span class="zh">20 个再平衡期的组合权重。策略保持多个活跃持仓，而不是集中押注单一资产。</span>
+                </figcaption>
+              </figure>
+            </section>
+
+            <section id="takeaway" class="article-section">
+              <h2>
+                <span class="en">Takeaway</span>
+                <span class="zh">我的理解</span>
+              </h2>
+              <p>
+                <span class="en">
+                  The result is a useful first version of an asset-management engine, but I would treat it as a controlled backtest rather than a finished trading system. The next step would be stricter robustness checks: transaction costs, sector concentration limits, alternative target-return rules, and comparisons against equal-weight and historical-mean baselines.
+                </span>
+                <span class="zh">
+                  这个结果说明框架已经能跑通，但我会把它看成一个可控回测，而不是完整交易系统。下一步应该加入更严格的稳健性检验：交易成本、行业集中度限制、不同目标收益设定，以及和等权组合、历史均值模型进行对比。
+                </span>
+              </p>
+            </section>
+          </div>
+        </article>
+
+        <footer class="footer">© 2026 Pengbiao (Jerry) Chen</footer>
+      </main>
+    </div>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["\\(", "\\)"]],
+          displayMath: [["\\[", "\\]"]]
+        }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>

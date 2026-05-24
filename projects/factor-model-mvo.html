@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en" data-lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Project note on factor models and mean-variance portfolio optimization.">
+    <title>Factor Models and MVO · Jerry Chen</title>
+    <link rel="stylesheet" href="../assets/css/styles.css?v=left-rail-20260524">
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <a class="portrait" href="../index.html?v=site-20260524" aria-label="Home">
+          <picture>
+            <source srcset="../assets/img/jerry-photo-ai-portrait.png" type="image/png">
+            <img src="../assets/img/jerry-photo-ai-portrait.png" alt="Jerry Chen">
+          </picture>
+        </a>
+        <div class="identity">
+          <h1>Jerry Chen</h1>
+          <p>
+            <span class="en">Master of Mathematical Finance student at the University of Toronto, with experience across risk, banking consulting, and empirical finance research.</span>
+            <span class="zh">多伦多大学数学金融硕士在读，具备风险管理、银行科技咨询和实证金融研究经历。</span>
+          </p>
+        </div>
+        <nav class="sidebar-nav" aria-label="Site navigation">
+          <a class="nav-home" href="../index.html?v=site-20260524"><span><span class="en">Portfolio</span><span class="zh">作品集</span></span></a>
+          <a class="nav-about" href="../about.html?v=site-20260524"><span><span class="en">About Me</span><span class="zh">关于我</span></span></a>
+          <a class="nav-contact" href="../contact.html?v=site-20260524"><span><span class="en">Contact</span><span class="zh">联系</span></span></a>
+        </nav>
+        <div class="sidebar-links">
+          <a class="small-link" href="mailto:Pengbiao.chen@mail.utoronto.ca">Email</a>
+          <a class="small-link" href="https://www.linkedin.com/in/pengbiao-c-1286a42b0/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="small-link" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="small-link" href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+          <a class="small-link" href="../assets/docs/Pengbiao_Jerry_Chen_Resume.pdf"><span class="en">Resume</span><span class="zh">简历</span></a>
+        </div>
+        <div class="controls">
+          <div class="segmented" aria-label="Language">
+            <button type="button" data-lang-button="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang-button="zh" aria-pressed="false">中</button>
+          </div>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+            <span data-theme-label>Dark</span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main">
+        <article>
+          <header class="article-header">
+            <p class="eyebrow">Quantitative Investment · Factor Models · Mean-Variance Optimization</p>
+            <h2>
+              <span class="en">LASSO Beats Higher In-Sample Fit</span>
+              <span class="zh">LASSO 在样本外击败更高拟合模型</span>
+            </h2>
+            <p>
+              <span class="en">
+                The main lesson from this project is that the model with the best regression fit is not automatically the best portfolio model. BSS explained the calibration window best, but LASSO produced the strongest out-of-sample wealth and Sharpe ratio because regularization made the MVO inputs more stable.
+              </span>
+              <span class="zh">
+                重点和心得：这个项目最重要的结论是，回归拟合最高的模型不一定是最好的投资组合模型。BSS 在样本内 adjusted R² 最高，但 LASSO 在样本外最终财富和 Sharpe ratio 最好，因为正则化让 MVO 输入更稳定。
+              </span>
+            </p>
+            <div class="chips">
+              <span class="chip accent">Factor Models</span>
+              <span class="chip">MVO</span>
+              <span class="chip plum">Model Validation</span>
+              <span class="chip gold">Out-of-Sample Testing</span>
+            </div>
+            <div class="article-hero contain">
+              <img src="../assets/img/project-factor-mvo-wealth.png" alt="Portfolio wealth evolution for OLS, FF, LASSO, and BSS portfolios">
+            </div>
+          </header>
+
+          <nav class="article-toc" aria-label="Project sections">
+            <a href="#question">Question</a>
+            <a href="#data">Data</a>
+            <a href="#method">Method</a>
+            <a href="#results">Results</a>
+            <a href="#takeaway">Takeaway</a>
+          </nav>
+
+          <div class="article-body">
+            <section id="question" class="article-section">
+              <h2>
+                <span class="en">Research Question</span>
+                <span class="zh">研究问题</span>
+              </h2>
+              <p>
+                <span class="en">
+                  I compared four ways to estimate expected returns and covariance matrices before feeding them into a long-only mean-variance optimizer. The practical question was simple: should a portfolio team prefer the model that explains the past best, or the model that gives more reliable inputs for the next rebalance?
+                </span>
+                <span class="zh">
+                  我比较了四种估计预期收益和协方差矩阵的方法，然后把这些输入放进 long-only mean-variance optimizer。核心问题很直接：投资组合团队应该选择样本内解释力最高的模型，还是选择能在下一期再平衡中提供更稳定输入的模型？
+                </span>
+              </p>
+            </section>
+
+            <section id="data" class="article-section">
+              <h2>Data</h2>
+              <p>
+                <span class="en">
+                  The universe contains 20 U.S. stocks across consumer, industrial, financial, technology, health care, energy, utilities, telecom, and materials sectors. I used monthly adjusted closing prices from December 2005 to December 2016 and converted them into excess returns after subtracting the monthly risk-free rate.
+                </span>
+                <span class="zh">
+                  股票池包含 20 只美国股票，覆盖消费、工业、金融、科技、医药、能源、公用事业、电信和材料等行业。我使用 2005 年 12 月到 2016 年 12 月的月度复权收盘价，并扣除月度无风险利率得到超额收益。
+                </span>
+              </p>
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Setup</th>
+                    <th>Why it matters</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Assets</td>
+                    <td>20 stocks</td>
+                    <td>Same investable universe for every model.</td>
+                  </tr>
+                  <tr>
+                    <td>Factors</td>
+                    <td>Mkt RF, SMB, HML, RMW, CMA, Mom, ST Rev, LT Rev</td>
+                    <td>OLS, LASSO, and BSS use the full eight-factor set; FF uses the first three.</td>
+                  </tr>
+                  <tr>
+                    <td>Calibration</td>
+                    <td>48 monthly observations</td>
+                    <td>Each model is estimated on a rolling four-year window.</td>
+                  </tr>
+                  <tr>
+                    <td>Test window</td>
+                    <td>2012-2016, annual rebalance</td>
+                    <td>Performance is measured out of sample, not on the fitted window.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section id="method" class="article-section">
+              <h2>
+                <span class="en">Method</span>
+                <span class="zh">方法</span>
+              </h2>
+              <p>
+                <span class="en">
+                  Each stock's excess return is explained by factor exposures. After estimation, the fitted intercepts, factor loadings, factor means, factor covariance, and residual variances are converted into the two MVO inputs: \( \mu \) and \( Q \).
+                </span>
+                <span class="zh">
+                  每只股票的超额收益由因子暴露解释。模型估计完成后，截距、因子载荷、因子均值、因子协方差和残差方差会被转换成 MVO 需要的两个输入：\( \mu \) 和 \( Q \)。
+                </span>
+              </p>
+              <div class="formula">
+                \[
+                  r^e_{i,t} = \alpha_i + \beta_i^\top f_t + \epsilon_{i,t}
+                \]
+              </div>
+              <div class="formula">
+                \[
+                  \mu = \alpha + V^\top \bar f,\qquad Q = V^\top F V + D
+                \]
+              </div>
+              <p>
+                <span class="en">
+                  I then solved the same long-only MVO problem for every model, so the comparison stays fair. The only thing changing is the way \( \mu \) and \( Q \) are estimated.
+                </span>
+                <span class="zh">
+                  接下来，每个模型都进入同一个 long-only MVO 问题，因此比较是公平的。真正变化的只有 \( \mu \) 和 \( Q \) 的估计方式。
+                </span>
+              </p>
+              <div class="formula">
+                \[
+                  \min_x x^\top Qx
+                  \quad \text{s.t.} \quad
+                  \mu^\top x \ge r_{\text{target}},\quad
+                  \mathbf{1}^\top x = 1,\quad
+                  x_i \ge 0
+                \]
+              </div>
+              <ul>
+                <li><strong>OLS:</strong> full eight-factor regression, easy to interpret but sensitive to noisy exposures.</li>
+                <li><strong>Fama-French:</strong> simpler three-factor benchmark using market, size, and value.</li>
+                <li><strong>LASSO:</strong> adds an \( L_1 \) penalty to shrink weak factor loadings.</li>
+                <li><strong>BSS:</strong> uses a hard subset rule with \( K=4 \), which can fit the past well but may be less stable out of sample.</li>
+              </ul>
+            </section>
+
+            <section id="results" class="article-section">
+              <h2>
+                <span class="en">Results</span>
+                <span class="zh">结果</span>
+              </h2>
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th>Model</th>
+                    <th>Avg. adjusted R²</th>
+                    <th>Final wealth</th>
+                    <th>Total return</th>
+                    <th>Annualized Sharpe</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>OLS</td>
+                    <td>0.4459</td>
+                    <td>$148,783.99</td>
+                    <td>48.78%</td>
+                    <td>1.0087</td>
+                  </tr>
+                  <tr>
+                    <td>Fama-French</td>
+                    <td>0.3605</td>
+                    <td>$147,520.10</td>
+                    <td>47.52%</td>
+                    <td>0.9888</td>
+                  </tr>
+                  <tr>
+                    <td>LASSO</td>
+                    <td>0.4425</td>
+                    <td>$148,894.34</td>
+                    <td>48.89%</td>
+                    <td>1.0115</td>
+                  </tr>
+                  <tr>
+                    <td>BSS</td>
+                    <td>0.4660</td>
+                    <td>$137,336.93</td>
+                    <td>37.34%</td>
+                    <td>0.8108</td>
+                  </tr>
+                </tbody>
+              </table>
+              <figure>
+                <img src="../assets/img/project-factor-mvo-lasso-weights.png" alt="LASSO portfolio weights by rebalance period">
+                <figcaption>
+                  <span class="en">LASSO portfolio weights across annual rebalance periods.</span>
+                  <span class="zh">LASSO 组合在年度再平衡期中的权重变化。</span>
+                </figcaption>
+              </figure>
+            </section>
+
+            <section id="takeaway" class="article-section">
+              <h2>
+                <span class="en">Takeaway</span>
+                <span class="zh">我的理解</span>
+              </h2>
+              <p>
+                <span class="en">
+                  I read this as a model-validation lesson, not just a portfolio result. Adjusted R² is useful, but it is not enough when the model output is used by an optimizer. MVO amplifies small errors in expected returns, so a slightly regularized model can be more useful than a model that fits the calibration window too aggressively.
+                </span>
+                <span class="zh">
+                  我把这个结果理解为一个模型验证问题，而不只是投资组合结果。Adjusted R² 有用，但如果模型输出要进入 optimizer，它就不够了。MVO 会放大预期收益估计里的小误差，所以一个稍微正则化的模型，往往比过度贴合样本内窗口的模型更实用。
+                </span>
+              </p>
+            </section>
+          </div>
+        </article>
+
+        <footer class="footer">© 2026 Pengbiao (Jerry) Chen</footer>
+      </main>
+    </div>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["\\(", "\\)"]],
+          displayMath: [["\\[", "\\]"]]
+        }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>
