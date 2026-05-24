@@ -76,7 +76,9 @@
           <nav class="article-toc" aria-label="Project sections">
             <a href="#question">Question</a>
             <a href="#data">Data</a>
-            <a href="#method">Method</a>
+            <a href="#pipeline">Pipeline</a>
+            <a href="#estimation">Estimation</a>
+            <a href="#optimization">Optimization</a>
             <a href="#results">Results</a>
             <a href="#takeaway">Takeaway</a>
           </nav>
@@ -89,16 +91,27 @@
               </h2>
               <p>
                 <span class="en">
-                  The task was to design an algorithmic asset-management strategy that can be evaluated on different datasets. My version uses a factor-based return model and a constrained optimizer, then tests the strategy through a rolling portfolio simulation.
+                  The project asks a practical portfolio-engineering question: if an asset manager receives only historical asset prices and factor returns, can the strategy repeatedly turn that information into tradeable portfolio weights? I framed the problem as a model-to-portfolio pipeline rather than a one-time optimization. At each rebalance date, the strategy estimates expected returns and risk, solves a constrained allocation problem, converts weights into shares, and holds the portfolio through the next investment window.
                 </span>
                 <span class="zh">
-                  这个任务是设计一个可以在不同数据集上被评估的算法资产管理策略。我的版本使用因子模型估计收益和风险，再通过约束优化器生成权重，并用滚动回测检验组合表现。
+                  这个项目的核心问题是：如果资产管理人只有历史资产价格和因子收益，策略能不能在每个再平衡日把这些信息稳定地转化为可交易的组合权重？我把它理解成一个从模型到组合的完整 pipeline，而不是一次性的优化。每个再平衡日，策略先估计预期收益和风险，再求解约束组合权重，最后把权重转换成持仓股数并持有到下一个窗口。
+                </span>
+              </p>
+              <p>
+                <span class="en">
+                  The goal is not to claim that OLS-MVO is the final trading strategy. The point is to build a clean benchmark engine: inputs are updated only with information available at the time, the allocation is long-only, and performance is judged through an out-of-sample wealth path plus turnover.
+                </span>
+                <span class="zh">
+                  这个项目不是要证明 OLS-MVO 就是最终交易策略，而是先搭建一个干净的基准引擎：每次只能使用当时已经可见的信息，组合不允许做空，并通过样本外财富路径和换手率来评价策略。
                 </span>
               </p>
             </section>
 
             <section id="data" class="article-section">
-              <h2>Data</h2>
+              <h2>
+                <span class="en">Data and Preprocessing</span>
+                <span class="zh">数据和预处理</span>
+              </h2>
               <p>
                 <span class="en">
                   I tested the strategy on the third project dataset: 33 assets with monthly adjusted prices from December 1999 to December 2014, plus eight factor returns and a risk-free rate. The out-of-sample period begins after the first five years of history, and the portfolio is rebalanced every six months.
@@ -119,56 +132,160 @@
                   <tr>
                     <td>Assets</td>
                     <td>33 assets</td>
-                    <td>The optimizer allocates across all available assets.</td>
+                    <td>The optimizer can allocate across a broad cross-section instead of a narrow stock list.</td>
                   </tr>
                   <tr>
                     <td>Factors</td>
-                    <td>Eight systematic factors plus RF</td>
-                    <td>Factor returns are used to estimate expected returns and covariance.</td>
+                    <td>Mkt RF, SMB, HML, RMW, CMA, Mom, ST Rev, LT Rev, RF</td>
+                    <td>The first eight factors explain asset excess returns; RF converts raw returns into excess returns.</td>
                   </tr>
                   <tr>
-                    <td>Estimation window</td>
-                    <td>Most recent 36 months</td>
-                    <td>Keeps the input estimates responsive without using only the latest few observations.</td>
+                    <td>Return construction</td>
+                    <td>Monthly adjusted-price returns minus RF</td>
+                    <td>Adjusted prices include corporate actions, and excess returns match the factor-model setup.</td>
                   </tr>
                   <tr>
-                    <td>Rebalance rule</td>
-                    <td>Every six months</td>
-                    <td>Lets the portfolio update while keeping turnover measurable.</td>
+                    <td>Backtest design</td>
+                    <td>20 semiannual rebalance periods from 2005 to 2014</td>
+                    <td>The first five years are used only to initialize the estimation history.</td>
                   </tr>
                 </tbody>
               </table>
             </section>
 
-            <section id="method" class="article-section">
+            <section id="pipeline" class="article-section">
               <h2>
-                <span class="en">Method</span>
-                <span class="zh">方法</span>
+                <span class="en">Strategy Pipeline</span>
+                <span class="zh">策略流程</span>
               </h2>
               <p>
                 <span class="en">
-                  The strategy first converts prices into excess returns, then estimates a factor model using the most recent 36 observations. The fitted model gives an expected return vector and covariance matrix for the optimizer.
+                  I organized the project as a function that receives the expanding history available at a rebalance date and returns a weight vector. This matters because it prevents look-ahead bias: the strategy cannot use future prices or future factor returns when it decides today's allocation.
                 </span>
                 <span class="zh">
-                  策略先把价格转换为超额收益，然后用最近 36 个月的数据估计因子模型。模型输出预期收益向量和协方差矩阵，作为优化器的输入。
+                  我把策略写成一个函数：在每个再平衡日，它只接收截至当时可见的历史收益和因子收益，然后输出一个权重向量。这样可以避免未来函数问题，因为策略在决定当前配置时不能使用未来价格或未来因子收益。
+                </span>
+              </p>
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th>Step</th>
+                    <th>What happens</th>
+                    <th>Why it matters</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1. Update history</td>
+                    <td>Use all observations up to the current calibration date.</td>
+                    <td>Mimics the information set available to an actual portfolio manager.</td>
+                  </tr>
+                  <tr>
+                    <td>2. Slice estimation window</td>
+                    <td>Use the most recent 36 monthly observations for OLS estimation.</td>
+                    <td>Balances recency with enough observations for factor regression.</td>
+                  </tr>
+                  <tr>
+                    <td>3. Estimate \( \mu \) and \( Q \)</td>
+                    <td>Run OLS factor regressions and convert coefficients into return and covariance inputs.</td>
+                    <td>MVO needs forward-looking inputs, not just historical prices.</td>
+                  </tr>
+                  <tr>
+                    <td>4. Optimize weights</td>
+                    <td>Solve a long-only MVO problem with a full-investment constraint.</td>
+                    <td>Keeps the strategy investable and prevents short-sale dependence.</td>
+                  </tr>
+                  <tr>
+                    <td>5. Hold and rebalance</td>
+                    <td>Convert weights into shares, hold for six months, then repeat.</td>
+                    <td>Creates a realistic path of portfolio value and turnover.</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="code-line">
+                periodReturns, periodFactRet → OLS estimator → μ, Q → long-only MVO → target weights → shares → six-month hold → turnover check
+              </div>
+            </section>
+
+            <section id="estimation" class="article-section">
+              <h2>
+                <span class="en">Estimation: From OLS to Portfolio Inputs</span>
+                <span class="zh">估计：从 OLS 到组合输入</span>
+              </h2>
+              <p>
+                <span class="en">
+                  The estimator starts by constructing monthly excess returns. For each asset, I regress excess returns on the eight factor returns. The fitted intercept and beta exposures are then translated into expected return and covariance estimates.
+                </span>
+                <span class="zh">
+                  估计器先构造月度超额收益。对每个资产，我把超额收益回归到八个因子收益上。随后，回归得到的截距和 beta 暴露会被转化成预期收益和协方差估计。
                 </span>
               </p>
               <div class="formula">
                 \[
-                  R_t = \frac{P_t}{P_{t-1}} - 1,\qquad R^e_t = R_t - r_{f,t}
+                  R_{i,t} = \frac{P_{i,t}}{P_{i,t-1}} - 1,\qquad
+                  R^e_{i,t} = R_{i,t} - r_{f,t}
                 \]
               </div>
               <div class="formula">
                 \[
-                  R^e_{i,t} = \alpha_i + \beta_i^\top f_t + \epsilon_{i,t}
+                  R^e_{i,t} = \alpha_i + \beta_i^\top f_t + \epsilon_{i,t},
+                  \qquad
+                  B = (X^\top X)^{-1}X^\top Y
                 \]
               </div>
               <p>
                 <span class="en">
-                  The portfolio step is long-only. I used the average estimated asset return as the target return, then minimized estimated variance under full-investment and non-negative-weight constraints.
+                  The key point is that the optimizer does not use the regression coefficients directly. It uses the implied expected return vector \( \mu \) and covariance matrix \( Q \). Factor covariance matters here because systematic factors can move together; ignoring that co-movement would make the risk estimate too simple.
                 </span>
                 <span class="zh">
-                  投资组合优化是 long-only 的。我把平均估计收益作为目标收益，在满仓和非负权重约束下最小化组合方差。
+                  关键点在于，优化器并不直接使用回归系数，而是使用由回归结果推导出的预期收益向量 \( \mu \) 和协方差矩阵 \( Q \)。这里必须考虑因子之间的协方差，因为系统性因子会共同波动；如果忽略这种共同波动，风险估计会过于简单。
+                </span>
+              </p>
+              <div class="formula">
+                \[
+                  \mu = \alpha + V^\top \bar f,\qquad
+                  Q = V^\top F V + D
+                \]
+              </div>
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th>Symbol</th>
+                    <th>Meaning</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>\(V\)</td>
+                    <td>Matrix of factor loadings across assets.</td>
+                  </tr>
+                  <tr>
+                    <td>\(\bar f\)</td>
+                    <td>Average factor return over the 36-month estimation window.</td>
+                  </tr>
+                  <tr>
+                    <td>\(F\)</td>
+                    <td>Factor covariance matrix.</td>
+                  </tr>
+                  <tr>
+                    <td>\(D\)</td>
+                    <td>Diagonal matrix of residual variances, capturing idiosyncratic risk.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section id="optimization" class="article-section">
+              <h2>
+                <span class="en">Optimization and Rebalancing Rule</span>
+                <span class="zh">优化和再平衡规则</span>
+              </h2>
+              <p>
+                <span class="en">
+                  The allocation is intentionally conservative in structure: no short positions, weights sum to one, and the portfolio must meet a target expected return equal to the average estimated return across assets. This target is simple, but it makes the optimizer avoid a pure minimum-variance portfolio that could ignore return estimates entirely.
+                </span>
+                <span class="zh">
+                  这个配置在结构上是比较保守的：不允许做空，权重和为 1，并且组合预期收益需要达到所有资产平均估计收益。这个目标收益设定很简单，但它可以避免优化器退化成完全不看收益的纯最小方差组合。
                 </span>
               </p>
               <div class="formula">
@@ -177,19 +294,20 @@
                   \quad \text{s.t.} \quad
                   \mu^\top x \ge \bar{\mu},\quad
                   \mathbf{1}^\top x = 1,\quad
-                  x \ge 0
+                  x_i \ge 0
                 \]
               </div>
               <p>
                 <span class="en">
-                  Turnover is tracked after each rebalance so the result is not judged only by the ending wealth.
+                  After weights are chosen, the backtest converts them into the number of shares using current prices. At the next rebalance, the existing holdings are marked to market before a new allocation is chosen. Turnover is then measured as the absolute difference between the new target weights and the pre-trade weights.
                 </span>
                 <span class="zh">
-                  每次再平衡后都会记录换手率，因此结果不只看最终财富，也看策略交易是否过于激进。
+                  权重确定后，回测会用当前价格把目标权重转换成持仓股数。到下一个再平衡日，先用最新价格给已有持仓估值，再重新优化新权重。换手率则用新目标权重和交易前权重之间的绝对差来衡量。
                 </span>
               </p>
               <div class="formula">
                 \[
+                  \text{Shares}_{i,t} = \frac{x_{i,t}W_t}{P_{i,t}},\qquad
                   \text{Turnover}_t = \sum_i \left|x_{i,t} - x^{\text{before}}_{i,t}\right|
                 \]
               </div>
@@ -200,6 +318,14 @@
                 <span class="en">Results</span>
                 <span class="zh">结果</span>
               </h2>
+              <p>
+                <span class="en">
+                  On the third dataset, the OLS-MVO strategy grows from $100,000 to $226,886.79 over the out-of-sample period. The wealth path is not smooth: it falls below the initial value during the crisis window, then recovers and compounds strongly through the later part of the test.
+                </span>
+                <span class="zh">
+                  在第三组数据上，OLS-MVO 策略从 $100,000 增长到 $226,886.79。财富路径并不平滑：组合在危机窗口中一度跌破初始资金，之后恢复并在回测后半段明显增长。
+                </span>
+              </p>
               <div class="metric-line">
                 <strong>$226,886.79</strong>
                 <span>
@@ -228,6 +354,20 @@
                   <span class="zh">每次再平衡的平均换手率。</span>
                 </span>
               </div>
+              <div class="metric-line">
+                <strong>20</strong>
+                <span>
+                  <span class="en">Semiannual rebalance periods in the out-of-sample simulation.</span>
+                  <span class="zh">样本外模拟中共有 20 个半年再平衡期。</span>
+                </span>
+              </div>
+              <div class="metric-line">
+                <strong>14.5</strong>
+                <span>
+                  <span class="en">Average number of active holdings across rebalance dates.</span>
+                  <span class="zh">每个再平衡日平均约有 14.5 个活跃持仓。</span>
+                </span>
+              </div>
               <figure>
                 <img src="../assets/img/project-algo-mvo-weights.png" alt="Backtested portfolio weights by rebalance period">
                 <figcaption>
@@ -235,6 +375,14 @@
                   <span class="zh">20 个再平衡期的组合权重。策略保持多个活跃持仓，而不是集中押注单一资产。</span>
                 </figcaption>
               </figure>
+              <p>
+                <span class="en">
+                  The weights chart shows why the strategy should be evaluated as a portfolio construction exercise, not only as a return chart. The optimizer changes exposures meaningfully across periods, but the no-short constraint keeps the portfolio interpretable. The 0.5501 average turnover also suggests that rebalancing is active, so transaction costs would be an important next robustness check.
+                </span>
+                <span class="zh">
+                  权重图说明这个项目不能只看收益曲线，也要看组合构建过程。优化器会在不同时期明显调整暴露，但 no-short 约束让组合仍然保持可解释性。0.5501 的平均换手率也说明策略交易并不低频，因此交易成本会是下一步必须加入的稳健性检验。
+                </span>
+              </p>
             </section>
 
             <section id="takeaway" class="article-section">
@@ -244,12 +392,34 @@
               </h2>
               <p>
                 <span class="en">
-                  The result is a useful first version of an asset-management engine, but I would treat it as a controlled backtest rather than a finished trading system. The next step would be stricter robustness checks: transaction costs, sector concentration limits, alternative target-return rules, and comparisons against equal-weight and historical-mean baselines.
+                  My main takeaway is that portfolio work is not only about choosing a clever signal. A usable strategy needs a repeatable data pipeline, an estimator, an optimizer, a rebalance rule, and diagnostics that reveal what the optimizer is actually doing. This project gave me a more practical view of investment risk: small choices in estimation window, target return, and turnover treatment can materially change the final strategy.
                 </span>
                 <span class="zh">
-                  这个结果说明框架已经能跑通，但我会把它看成一个可控回测，而不是完整交易系统。下一步应该加入更严格的稳健性检验：交易成本、行业集中度限制、不同目标收益设定，以及和等权组合、历史均值模型进行对比。
+                  我最大的收获是，投资组合项目不只是找一个聪明的信号。一个可用的策略需要可重复的数据流程、估计器、优化器、再平衡规则，以及能够解释优化器行为的诊断指标。这个项目让我更实际地理解了 investment risk：估计窗口、目标收益、换手处理这些看似小的设定，都会明显改变最终策略。
                 </span>
               </p>
+              <h3>
+                <span class="en">What I would test next</span>
+                <span class="zh">下一步会继续检验什么</span>
+              </h3>
+              <ul>
+                <li>
+                  <span class="en">Add transaction costs and slippage so turnover is penalized directly.</span>
+                  <span class="zh">加入交易成本和滑点，让换手率直接进入策略评价。</span>
+                </li>
+                <li>
+                  <span class="en">Compare against equal-weight, historical mean-variance, and factor-parity baselines.</span>
+                  <span class="zh">和等权组合、历史均值方差组合、因子风险平价组合进行对比。</span>
+                </li>
+                <li>
+                  <span class="en">Add concentration constraints so no sector or small group of assets dominates the allocation.</span>
+                  <span class="zh">加入集中度约束，避免单一行业或少数资产主导组合。</span>
+                </li>
+                <li>
+                  <span class="en">Stress test the 36-month estimation window against shorter and longer alternatives.</span>
+                  <span class="zh">对 36 个月估计窗口做敏感性测试，比较更短或更长窗口的结果。</span>
+                </li>
+              </ul>
             </section>
           </div>
         </article>
