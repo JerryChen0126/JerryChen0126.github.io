@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en" data-lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Project note on Oracle AI infrastructure financing risk and issuer forward sale hedging.">
+    <title>Oracle Issuer Forward · Jerry Chen</title>
+    <link rel="stylesheet" href="../assets/css/styles.css?v=blue-20260711">
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <a class="portrait" href="../index.html?v=site-20260711" aria-label="Home">
+          <picture>
+            <source srcset="../assets/img/jerry-photo-ai-portrait.png" type="image/png">
+            <img src="../assets/img/jerry-photo-ai-portrait.png" alt="Jerry Chen">
+          </picture>
+        </a>
+        <div class="identity">
+          <h1>Jerry Chen</h1>
+          <p>
+            <span class="en">Master of Mathematical Finance student at the University of Toronto, with experience across risk, banking consulting, and empirical finance research.</span>
+            <span class="zh">多伦多大学数学金融硕士在读，具备风险管理、银行科技咨询和实证金融研究经历。</span>
+          </p>
+        </div>
+        <nav class="sidebar-nav" aria-label="Site navigation">
+          <a class="nav-home" href="../index.html?v=site-20260711"><span><span class="en">Portfolio</span><span class="zh">作品集</span></span></a>
+          <a class="nav-about" href="../about.html?v=site-20260711"><span><span class="en">About Me</span><span class="zh">关于我</span></span></a>
+          <a class="nav-contact" href="../contact.html?v=site-20260711"><span><span class="en">Contact</span><span class="zh">联系</span></span></a>
+        </nav>
+        <div class="sidebar-links">
+          <a class="small-link" href="mailto:Pengbiao.chen@mail.utoronto.ca">Email</a>
+          <a class="small-link" href="https://www.linkedin.com/in/pengbiao-c-1286a42b0/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="small-link" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="small-link" href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+          <a class="small-link" href="../assets/docs/Pengbiao_Jerry_Chen_Resume.pdf"><span class="en">Resume</span><span class="zh">简历</span></a>
+        </div>
+        <div class="controls">
+          <div class="segmented" aria-label="Language">
+            <button type="button" data-lang-button="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang-button="zh" aria-pressed="false">中</button>
+          </div>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+            <span data-theme-label>Dark</span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main">
+        <article>
+          <header class="article-header">
+            <p class="eyebrow">Corporate Risk · Derivatives · Capital Structure</p>
+            <h2>
+              <span class="en">Oracle Locks Its AI Financing Window</span>
+              <span class="zh">Oracle 锁定 AI 基建融资窗口</span>
+            </h2>
+            <p>
+              <span class="en">
+                The key insight is that Oracle's AI cloud opportunity is not only a growth story. It is also a funding-timing problem: capex, leases, data centers and GPU capacity require cash now, while RPO and cloud revenue convert later. I treated the hedge as a financing-price hedge, not a directional stock trade.
+              </span>
+              <span class="zh">
+                重点和心得：Oracle 的 AI cloud 机会不只是增长故事，也是一个 funding timing 问题。数据中心、租赁、GPU 和电力容量需要先投入现金，但 RPO 和云收入要之后才逐步转化。这个项目里，我把 issuer forward 理解为融资价格对冲，而不是押注股价方向。
+              </span>
+            </p>
+            <div class="chips">
+              <span class="chip accent">Risk Management</span>
+              <span class="chip">Issuer Forward</span>
+              <span class="chip plum">Capital Raising</span>
+              <span class="chip gold">AI Infrastructure</span>
+            </div>
+            <div class="article-hero contain">
+              <img src="../assets/img/project-oracle-forward-sale.png" alt="Oracle issuer forward sale recommendation">
+            </div>
+          </header>
+
+          <nav class="article-toc" aria-label="Project sections">
+            <a href="#question">Question</a>
+            <a href="#data">Data</a>
+            <a href="#exposures">Exposures</a>
+            <a href="#structure">Structure</a>
+            <a href="#economics">Economics</a>
+            <a href="#risks">Risks</a>
+            <a href="#takeaway">Takeaway</a>
+          </nav>
+
+          <div class="article-body">
+            <section id="question" class="article-section">
+              <h2>
+                <span class="en">Research Question</span>
+                <span class="zh">研究问题</span>
+              </h2>
+              <p>
+                <span class="en">
+                  The case asks how a large technology company should finance an AI infrastructure build-out when demand visibility is strong but cash conversion is delayed. I focused on Oracle because the latest filings show fast cloud demand, very large RPO, and a sharp increase in capital expenditures. The corporate-finance question becomes: how can Oracle reduce the risk of needing to issue equity or debt later under worse market conditions?
+                </span>
+                <span class="zh">
+                  这个 case 的问题是：当 AI 基建需求很强但现金回收滞后时，一家大型科技公司应该如何安排融资和风险管理？我选择 Oracle，是因为其最新 filings 显示云业务需求增长很快、RPO 很大，同时资本开支大幅上升。公司金融层面的核心问题是：Oracle 如何降低未来在更差市场环境中被迫融资的风险？
+                </span>
+              </p>
+            </section>
+
+            <section id="data" class="article-section">
+              <h2>
+                <span class="en">Data and Setup</span>
+                <span class="zh">数据和背景</span>
+              </h2>
+              <p>
+                <span class="en">
+                  I used the project slides' filing-based figures to separate visible demand from near-term cash needs. The numbers point in the same direction: Oracle has contracted demand, but the infrastructure must be funded before that demand fully turns into cash flow.
+                </span>
+                <span class="zh">
+                  我用 slides 中基于 filings 的数字，把“可见需求”和“近期现金需求”拆开看。数字指向同一个结论：Oracle 的 contracted demand 很强，但基础设施需要在这些需求完全转化为现金流之前先被融资。
+                </span>
+              </p>
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th>Metric</th>
+                    <th>Figure</th>
+                    <th>Interpretation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Q3 FY2026 revenue</td>
+                    <td>$17.2B, +22% YoY</td>
+                    <td>Growth is visible, especially in cloud and software.</td>
+                  </tr>
+                  <tr>
+                    <td>Q3 cloud and software</td>
+                    <td>$15.0B, 88% of revenue</td>
+                    <td>Cloud and software are now the core business engine.</td>
+                  </tr>
+                  <tr>
+                    <td>FY2026 year-end RPO</td>
+                    <td>$638B</td>
+                    <td>Large contracted demand, but not immediate cash.</td>
+                  </tr>
+                  <tr>
+                    <td>FY2026 operating cash flow vs capex</td>
+                    <td>$32.0B vs $55.7B</td>
+                    <td>The gap implies roughly negative $23.7B free cash flow.</td>
+                  </tr>
+                  <tr>
+                    <td>Total borrowings</td>
+                    <td>$134.6B as of Feb. 2026</td>
+                    <td>More debt financing raises leverage and interest-expense sensitivity.</td>
+                  </tr>
+                </tbody>
+              </table>
+              <figure>
+                <img src="../assets/img/project-oracle-funding-gap.png" alt="Oracle capex arrives before revenue cash flow">
+                <figcaption>
+                  <span class="en">The central setup: Oracle's AI infrastructure spending arrives before the related cloud cash flow fully converts.</span>
+                  <span class="zh">核心背景：Oracle 的 AI 基建支出先发生，而相关云业务现金流要之后才逐步兑现。</span>
+                </figcaption>
+              </figure>
+            </section>
+
+            <section id="exposures" class="article-section">
+              <h2>
+                <span class="en">Exposure Mapping</span>
+                <span class="zh">风险暴露拆解</span>
+              </h2>
+              <p>
+                <span class="en">
+                  I separated the case into three exposures. The binding one is not FX or a single market variable; it is liquidity and financing risk created by capex timing. Interest-rate and FX hedges are still useful, but they support the main financing plan rather than replace it.
+                </span>
+                <span class="zh">
+                  我把这个 case 拆成三类风险暴露。真正的核心不是外汇，也不是单一市场变量，而是由 capex timing 造成的流动性和融资风险。利率和 FX hedge 有价值，但它们是辅助主融资方案，而不是替代主方案。
+                </span>
+              </p>
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th>Exposure</th>
+                    <th>Evidence</th>
+                    <th>Risk-management implication</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Liquidity / capex risk</td>
+                    <td>$39.2B capex in first nine months FY26; +223% vs prior year</td>
+                    <td>Requires capital raising and liquidity planning, not just a derivative overlay.</td>
+                  </tr>
+                  <tr>
+                    <td>Interest-rate risk</td>
+                    <td>$23B maturities due within three years; +50 bps on $23B ≈ $115M annual cost</td>
+                    <td>Rate locks can cap the cost of planned debt issuance or refinancing.</td>
+                  </tr>
+                  <tr>
+                    <td>FX risk</td>
+                    <td>34% of revenue outside the Americas; 10% FX depreciation sensitivity</td>
+                    <td>Rolling forwards can reduce near-term transaction exposure.</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="formula">
+                \[
+                  \Delta \text{Interest Cost} \approx \text{Debt Repriced} \times \Delta r
+                  = \$23\text{B} \times 0.50\% \approx \$115\text{M}
+                \]
+              </div>
+            </section>
+
+            <section id="structure" class="article-section">
+              <h2>
+                <span class="en">Recommended Structure</span>
+                <span class="zh">推荐结构</span>
+              </h2>
+              <p>
+                <span class="en">
+                  The recommended trade is a $10B issuer forward sale inside Oracle's existing $20B ATM equity program. Oracle locks the future equity issuance price now, but cash receipt and share dilution happen later when funding is actually needed. That timing is the whole point of the structure.
+                </span>
+                <span class="zh">
+                  推荐方案是在 Oracle 现有 $20B ATM equity program 内先做 $10B issuer forward sale。Oracle 现在锁定未来股权融资价格，但现金到账和股本摊薄可以推迟到真正需要资金时发生。这个时间错配的处理就是结构的核心价值。
+                </span>
+              </p>
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th>Step</th>
+                    <th>What happens</th>
+                    <th>Why it matters</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Trade date</td>
+                    <td>Oracle signs the forward and locks a financing price.</td>
+                    <td>No immediate cash and no immediate new-share issuance.</td>
+                  </tr>
+                  <tr>
+                    <td>Forward period</td>
+                    <td>Dealer manages the hedge while Oracle waits for capex funding needs.</td>
+                    <td>Separates price certainty from cash timing.</td>
+                  </tr>
+                  <tr>
+                    <td>Settlement</td>
+                    <td>Oracle issues shares and receives cash.</td>
+                    <td>Dilution happens when funding is needed, not at trade date.</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="formula">
+                \[
+                  N = \frac{\$10\text{B}}{P_{\text{forward}}},\qquad
+                  \text{Cash at Settlement} = N \times P_{\text{forward}}
+                \]
+              </div>
+              <p>
+                <span class="en">
+                  I would pair the issuer forward with a rate lock on roughly 70% of planned debt and rolling FX forwards on about 50-70% of relevant near-term FX exposure. The derivative package is therefore layered: equity financing window first, interest-rate cost second, FX transaction exposure third.
+                </span>
+                <span class="zh">
+                  我会把 issuer forward 和两个 overlay 配套：对约 70% 的计划债务融资做 rate lock，对约 50-70% 的近期 FX exposure 做 rolling forwards。因此整个方案是分层的：第一层锁定股权融资窗口，第二层控制利率成本，第三层覆盖外汇交易风险。
+                </span>
+              </p>
+            </section>
+
+            <section id="economics" class="article-section">
+              <h2>
+                <span class="en">Scenario Economics</span>
+                <span class="zh">情景收益逻辑</span>
+              </h2>
+              <p>
+                <span class="en">
+                  The structure is easiest to understand through three stock-price scenarios. If the stock falls before settlement, the forward protects Oracle because it avoids issuing equity at the depressed price. If the stock stays near the forward price, the result is close to neutral. If the stock rises sharply, Oracle gives up the chance to issue later at a higher price.
+                </span>
+                <span class="zh">
+                  这个结构可以用三个股价情景理解。如果结算前股价下跌，forward 保护 Oracle，因为公司不用在低价时被动发股融资。如果股价接近 forward price，经济效果接近中性。如果股价大幅上涨，Oracle 会放弃之后以更高价格融资的机会。
+                </span>
+              </p>
+              <div class="formula">
+                \[
+                  \text{Protection if stock falls} \approx N \times (P_{\text{forward}} - S_T)
+                \]
+              </div>
+              <div class="formula">
+                \[
+                  \text{Opportunity Cost if stock rises} \approx N \times (S_T - P_{\text{forward}})
+                \]
+              </div>
+              <figure>
+                <img src="../assets/img/project-oracle-scenario-map.png" alt="Oracle issuer forward scenario and risk map">
+                <figcaption>
+                  <span class="en">Illustrative scenario analysis: the forward buys financing certainty but gives up upside if the future stock price is much higher.</span>
+                  <span class="zh">情景分析：forward 换来融资确定性，但如果未来股价大幅上涨，公司会放弃一部分上行融资机会。</span>
+                </figcaption>
+              </figure>
+            </section>
+
+            <section id="risks" class="article-section">
+              <h2>
+                <span class="en">Residual Risks</span>
+                <span class="zh">剩余风险</span>
+              </h2>
+              <p>
+                <span class="en">
+                  A good hedge should be clear about what it cannot hedge. The issuer forward reduces future financing-price uncertainty, but it does not make the AI infrastructure investment profitable. Oracle still has to convert backlog and RPO into high-margin revenue.
+                </span>
+                <span class="zh">
+                  一个好的 hedge 必须讲清楚它不能对冲什么。issuer forward 降低的是未来融资价格不确定性，但它不能保证 AI 基建投资最终盈利。Oracle 仍然要把 backlog 和 RPO 转化成高利润收入。
+                </span>
+              </p>
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th>Risk</th>
+                    <th>Why it remains</th>
+                    <th>Mitigation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Opportunity cost</td>
+                    <td>Oracle gives up upside if the share price rallies materially.</td>
+                    <td>Execute in tranches instead of locking the full authorization.</td>
+                  </tr>
+                  <tr>
+                    <td>Dilution and signaling</td>
+                    <td>Physical settlement still creates new shares and may signal heavy funding needs.</td>
+                    <td>Frame proceeds as funding for contracted AI infrastructure demand.</td>
+                  </tr>
+                  <tr>
+                    <td>Counterparty and borrow risk</td>
+                    <td>Dealers must manage stock borrow and hedge execution.</td>
+                    <td>Use multiple high-quality dealers and clear documentation.</td>
+                  </tr>
+                  <tr>
+                    <td>AI execution risk</td>
+                    <td>Utilization, margins, power cost and GPU economics may disappoint.</td>
+                    <td>Use staged capex, milestones, customer commitments and liquidity buffers.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section id="takeaway" class="article-section">
+              <h2>
+                <span class="en">Takeaway</span>
+                <span class="zh">我的理解</span>
+              </h2>
+              <p>
+                <span class="en">
+                  My takeaway is that risk management starts with identifying the binding constraint. For Oracle, the constraint is not demand visibility; it is financing timing and balance-sheet flexibility during a capital-intensive AI build-out. The issuer forward is attractive because it matches that exact problem: lock part of the future funding price now, receive the cash later, and keep the company from being forced into a weaker future market window.
+                </span>
+                <span class="zh">
+                  我的主要收获是，风险管理要先找到真正的 binding constraint。对 Oracle 来说，问题不是需求是否存在，而是在资本密集型 AI 扩张中如何处理融资 timing 和资产负债表灵活性。issuer forward 的吸引力就在于它精准匹配这个问题：现在锁定一部分未来融资价格，之后在需要资金时再收现金，避免公司被迫进入更弱的未来融资窗口。
+                </span>
+              </p>
+            </section>
+          </div>
+        </article>
+
+        <footer class="footer">© 2026 Pengbiao (Jerry) Chen</footer>
+      </main>
+    </div>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["\\(", "\\)"]],
+          displayMath: [["\\[", "\\]"]]
+        }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>
