@@ -1,0 +1,86 @@
+.research-paper .article-header {
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.research-paper .article-header h2 {
+  font-size: 2rem;
+  line-height: 1.15;
+  overflow-wrap: break-word;
+}
+
+.research-paper .article-header p {
+  margin-top: 0;
+}
+
+.research-paper .paper-full-title {
+  color: var(--ink);
+  font-weight: 650;
+  font-size: 1.05rem;
+}
+
+.research-paper .paper-authors {
+  font-size: 0.9rem;
+}
+
+.research-paper .paper-figure {
+  margin: 20px 0;
+}
+
+.research-paper .paper-figure img {
+  height: auto;
+  aspect-ratio: auto;
+  padding: 10px;
+}
+
+.research-paper .article-header .paper-figure {
+  margin: 6px 0 0;
+}
+
+.research-paper .article-section h2 {
+  font-size: 1.8rem;
+  line-height: 1.18;
+}
+
+.research-paper .article-table caption {
+  text-align: left;
+  color: var(--muted);
+  font-size: 0.85rem;
+  padding-bottom: 10px;
+}
+
+.research-paper .paper-version {
+  margin-top: 18px;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.research-paper p a:not(.read-more) {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.research-paper .metric-line {
+  grid-template-columns: 70px minmax(0, 1fr);
+}
+
+.research-paper .formula mjx-container {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+@media (max-width: 620px) {
+  .research-paper .article-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .research-paper .article-section h2 {
+    font-size: 1.55rem;
+  }
+
+  .research-paper .article-section {
+    padding: 24px 0;
+  }
+}
