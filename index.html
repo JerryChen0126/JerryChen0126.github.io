@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Jerry Chen: research in model validation, investment risk, quantitative investing and banking. Explore research notes, methods and results.">
     <title>Jerry Chen | Quantitative Research &amp; Risk</title>
-    <link rel="stylesheet" href="assets/css/styles.css?v=finance-20261023">
+    <link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="assets/css/styles.css?v=editorial-20261023">
   </head>
   <body>
     <div class="layout">
@@ -26,49 +27,70 @@
       </header>
 
       <main id="content" class="main main-portfolio" tabindex="-1">
-        <section id="projects" class="page-title compact-title">
+        <section id="projects" class="page-title portfolio-intro">
           <p class="eyebrow">
-            <span class="en">Portfolio</span>
-            <span class="zh">作品集</span>
+            <span class="en">Jerry Chen · Research Portfolio</span>
+            <span class="zh">Jerry Chen · 研究作品集</span>
           </p>
           <h1>
             <span class="en">Quantitative Research &amp; Risk</span>
             <span class="zh">量化研究与风险分析</span>
           </h1>
-          <p class="home-intro"><span class="en">I study how financial models inform investment decisions: testing assumptions, evaluating portfolio risk, and assessing whether empirical signals hold out of sample. These projects bring together my work in quantitative research, banking and risk analysis.</span><span class="zh">我关注金融模型如何服务于投资决策：检验模型假设、评估投资组合风险，以及判断实证信号在样本外是否依然成立。这里汇集了我在量化研究、银行业务和风险分析方面的项目。</span></p>
+          <p class="home-intro"><span class="en">I study the link between financial models and investment decisions: what the evidence supports, how risk is measured, and where assumptions break down.</span><span class="zh">我关注金融模型与投资决策之间的联系：证据能够支持什么、风险如何衡量，以及模型假设在什么条件下会失效。</span></p>
+          <div class="intro-foot">
+            <div class="focus-areas"><span><span class="en">Model validation</span><span class="zh">模型验证</span></span><span><span class="en">Investment risk</span><span class="zh">投资风险</span></span><span><span class="en">Quantitative investing</span><span class="zh">量化投资</span></span></div>
+            <a href="about.html"><span class="en">Background &amp; experience</span><span class="zh">背景与经历</span></a>
+          </div>
         </section>
 
         <section class="section project-section" aria-labelledby="selected-work">
-          <h2 id="selected-work" class="sr-only"><span class="en">Selected Research</span><span class="zh">精选研究</span></h2>
-          <div class="project-cover-list">
-            <article class="project-cover-card">
-              <a class="project-cover-media contain" href="projects/cbam-equity-repricing.html?v=20260918" aria-label="Open CBAM equity repricing paper">
-                <img src="assets/img/cbam-paper-event-means.png" width="2102" height="1392" alt="Figure from the CBAM manuscript showing event-window returns and confidence bands">
-              </a>
+          <div class="research-heading">
+            <h2 id="selected-work"><span class="en">Selected work</span><span class="zh">精选研究</span></h2>
+            <span class="research-count" aria-live="polite" data-research-count><span class="en">7 projects</span><span class="zh">7 个项目</span></span>
+          </div>
+          <div class="research-filters" role="group" aria-label="Research categories" hidden>
+            <button type="button" data-research-filter="all" aria-pressed="true" aria-controls="research-list"><span class="en">All work</span><span class="zh">全部</span><small>7</small></button>
+            <button type="button" data-research-filter="empirical" aria-pressed="false" aria-controls="research-list"><span class="en">Empirical</span><span class="zh">实证研究</span><small>3</small></button>
+            <button type="button" data-research-filter="portfolio" aria-pressed="false" aria-controls="research-list"><span class="en">Portfolio &amp; risk</span><span class="zh">组合与风险</span><small>3</small></button>
+            <button type="button" data-research-filter="banking" aria-pressed="false" aria-controls="research-list"><span class="en">Banking</span><span class="zh">银行业务</span><small>1</small></button>
+          </div>
+          <div id="research-list" class="project-cover-list">
+            <article class="project-cover-card project-featured" data-research-category="empirical">
               <div class="project-cover-body">
-                <p class="project-cover-meta"><span class="en">Research paper · Under review</span><span class="zh">研究论文 · 审稿中</span></p>
-                <h3><a href="projects/cbam-equity-repricing.html?v=20260918"><span class="en">CBAM Equity Repricing</span><span class="zh">CBAM 与股票重新定价</span></a></h3>
-                <p><span class="en">First-author research with Luis Seco and Azin Sharifi: 37 metals producers, three policy events, and a careful distinction between a missing signal and evidence of no effect.</span><span class="zh">与 Luis Seco、Azin Sharifi 合作的第一作者研究：37 家金属企业、三个政策事件，区分“没有检出信号”和“证明没有效应”。</span></p>
+                <p class="project-cover-meta"><span class="en">Featured paper · Under review</span><span class="zh">代表论文 · 审稿中</span></p>
+                <h3><a href="projects/cbam-equity-repricing.html?v=editorial-20261023"><span class="en">CBAM Equity Repricing</span><span class="zh">CBAM 与股票重新定价</span></a></h3>
+                <p><span class="en">Do carbon-intensive firms reprice when climate policy changes? My first-author paper with Luis Seco and Azin Sharifi examines the evidence, its sensitivity, and the limits of a null result.</span><span class="zh">气候政策变化时，高碳企业是否会被重新定价？我与 Luis Seco、Azin Sharifi 合作的第一作者论文，检验证据的稳健性，以及“不显著”究竟能够说明什么。</span></p>
                 <div class="chips">
                   <span class="chip accent"><span class="en">Climate Finance</span><span class="zh">气候金融</span></span>
                   <span class="chip"><span class="en">Event Study</span><span class="zh">事件研究</span></span>
                   <span class="chip plum"><span class="en">Model Risk</span><span class="zh">模型风险</span></span>
                 </div>
+                <dl class="project-facts">
+                  <div><dt><span class="en">Sample</span><span class="zh">样本</span></dt><dd><span class="en">37 producers</span><span class="zh">37 家金属企业</span></dd></div>
+                  <div><dt><span class="en">Design</span><span class="zh">设计</span></dt><dd><span class="en">3 policy events</span><span class="zh">3 个政策事件</span></dd></div>
+                  <div><dt><span class="en">Focus</span><span class="zh">重点</span></dt><dd><span class="en">Robust inference</span><span class="zh">稳健推断</span></dd></div>
+                </dl>
                 <div class="contact-links">
-                  <a class="read-more" href="projects/cbam-equity-repricing.html?v=20260918"><span class="en">Read research</span><span class="zh">阅读研究解读</span></a>
+                  <a class="read-more" href="projects/cbam-equity-repricing.html?v=editorial-20261023"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
                   <a class="read-more" href="assets/docs/CBAM_Equity_Repricing_Manuscript.pdf" target="_blank" rel="noopener"><span class="en">Manuscript PDF</span><span class="zh">论文 PDF</span></a>
                 </div>
               </div>
+              <figure class="featured-exhibit">
+                <a class="project-cover-media contain" href="projects/cbam-equity-repricing.html?v=editorial-20261023" aria-label="Open CBAM equity repricing paper">
+                  <img src="assets/img/cbam-paper-event-means.png" width="2102" height="1392" alt="Figure from the CBAM manuscript showing event-window returns and confidence bands" fetchpriority="high">
+                </a>
+                <figcaption><span class="en">From the manuscript · Event-window returns</span><span class="zh">论文原图 · 事件窗口收益</span></figcaption>
+              </figure>
             </article>
 
-            <article class="project-cover-card">
-              <a class="project-cover-media contain" href="projects/oracle-issuer-forward.html?v=site-20260711" aria-label="Open Oracle issuer forward project">
+            <article class="project-cover-card" data-research-category="portfolio">
+              <a class="project-cover-media contain" href="projects/oracle-issuer-forward.html?v=editorial-20261023" aria-label="Open Oracle issuer forward project">
                 <img src="assets/img/project-oracle-forward-sale.png" alt="Oracle issuer forward sale recommendation slide">
               </a>
               <div class="project-cover-body">
                 <p class="project-cover-meta"><span class="en">Corporate Risk · Capital Structure</span><span class="zh">企业风险 · 资本结构</span></p>
                 <h3>
-                  <a href="projects/oracle-issuer-forward.html?v=site-20260711">
+                  <a href="projects/oracle-issuer-forward.html?v=editorial-20261023">
                     <span class="en">Oracle Financing &amp; Hedging</span>
                     <span class="zh">Oracle 融资与对冲</span>
                   </a>
@@ -82,18 +104,18 @@
                   <span class="chip"><span class="en">Derivatives</span><span class="zh">衍生品</span></span>
                   <span class="chip plum"><span class="en">Capital Raising</span><span class="zh">资本筹集</span></span>
                 </div>
-                <a class="read-more" href="projects/oracle-issuer-forward.html?v=site-20260711"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
+                <a class="read-more" href="projects/oracle-issuer-forward.html?v=editorial-20261023"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
               </div>
             </article>
 
-            <article class="project-cover-card">
-              <a class="project-cover-media contain" href="projects/ai-infrastructure-fund.html?v=site-20260711" aria-label="Open AI infrastructure fund project">
+            <article class="project-cover-card" data-research-category="portfolio">
+              <a class="project-cover-media contain" href="projects/ai-infrastructure-fund.html?v=editorial-20261023" aria-label="Open AI infrastructure fund project">
                 <img src="assets/img/project-ai-infra-portfolio-map.png" alt="AI infrastructure supply-chain portfolio map">
               </a>
               <div class="project-cover-body">
                 <p class="project-cover-meta"><span class="en">Thematic Investing · Portfolio Design</span><span class="zh">主题投资 · 投资组合设计</span></p>
                 <h3>
-                  <a href="projects/ai-infrastructure-fund.html?v=site-20260711">
+                  <a href="projects/ai-infrastructure-fund.html?v=editorial-20261023">
                     <span class="en">AI Infrastructure Portfolio</span>
                     <span class="zh">AI 基础设施投资组合</span>
                   </a>
@@ -107,18 +129,18 @@
                   <span class="chip accent"><span class="en">AI Infrastructure</span><span class="zh">AI 基础设施</span></span>
                   <span class="chip"><span class="en">Endowment Allocation</span><span class="zh">捐赠基金配置</span></span>
                 </div>
-                <a class="read-more" href="projects/ai-infrastructure-fund.html?v=site-20260711"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
+                <a class="read-more" href="projects/ai-infrastructure-fund.html?v=editorial-20261023"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
               </div>
             </article>
 
-            <article class="project-cover-card">
-              <a class="project-cover-media contain" href="projects/factor-model-mvo.html?v=site-20260524" aria-label="Open factor model MVO project">
+            <article class="project-cover-card" data-research-category="empirical">
+              <a class="project-cover-media contain" href="projects/factor-model-mvo.html?v=editorial-20261023" aria-label="Open factor model MVO project">
                 <img src="assets/img/project-factor-mvo-wealth.png" alt="Portfolio wealth evolution for factor-model MVO portfolios">
               </a>
               <div class="project-cover-body">
                 <p class="project-cover-meta"><span class="en">Quantitative Investment · Model Validation</span><span class="zh">量化投资 · 模型验证</span></p>
                 <h3>
-                  <a href="projects/factor-model-mvo.html?v=site-20260524">
+                  <a href="projects/factor-model-mvo.html?v=editorial-20261023">
                     <span class="en">Factor Models &amp; Allocation</span>
                     <span class="zh">因子模型与资产配置</span>
                   </a>
@@ -132,18 +154,18 @@
                   <span class="chip"><span class="en">MVO</span><span class="zh">均值方差优化</span></span>
                   <span class="chip plum"><span class="en">Model Validation</span><span class="zh">模型验证</span></span>
                 </div>
-                <a class="read-more" href="projects/factor-model-mvo.html?v=site-20260524"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
+                <a class="read-more" href="projects/factor-model-mvo.html?v=editorial-20261023"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
               </div>
             </article>
 
-            <article class="project-cover-card">
-              <a class="project-cover-media contain" href="projects/algorithmic-asset-management.html?v=site-20260524" aria-label="Open algorithmic asset management project">
+            <article class="project-cover-card" data-research-category="portfolio">
+              <a class="project-cover-media contain" href="projects/algorithmic-asset-management.html?v=editorial-20261023" aria-label="Open algorithmic asset management project">
                 <img src="assets/img/project-algo-mvo-wealth.png" alt="Backtested portfolio wealth evolution">
               </a>
               <div class="project-cover-body">
                 <p class="project-cover-meta"><span class="en">Portfolio Construction · Backtesting</span><span class="zh">投资组合构建 · 回测</span></p>
                 <h3>
-                  <a href="projects/algorithmic-asset-management.html?v=site-20260524">
+                  <a href="projects/algorithmic-asset-management.html?v=editorial-20261023">
                     <span class="en">Algorithmic Asset Management</span>
                     <span class="zh">算法资产管理</span>
                   </a>
@@ -157,18 +179,18 @@
                   <span class="chip accent"><span class="en">Backtesting</span><span class="zh">回测</span></span>
                   <span class="chip"><span class="en">Risk Control</span><span class="zh">风险控制</span></span>
                 </div>
-                <a class="read-more" href="projects/algorithmic-asset-management.html?v=site-20260524"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
+                <a class="read-more" href="projects/algorithmic-asset-management.html?v=editorial-20261023"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
               </div>
             </article>
 
-            <article class="project-cover-card">
-              <a class="project-cover-media contain" href="projects/meme-driven-volatility.html?v=site-20260521" aria-label="Open meme volatility project">
+            <article class="project-cover-card" data-research-category="empirical">
+              <a class="project-cover-media contain" href="projects/meme-driven-volatility.html?v=editorial-20261023" aria-label="Open meme volatility project">
                 <img src="assets/img/project-meme-cumulative-returns.png" alt="Cumulative returns by MDV exposure group">
               </a>
               <div class="project-cover-body">
                 <p class="project-cover-meta"><span class="en">Quantitative Research · Asset Pricing</span><span class="zh">量化研究 · 资产定价</span></p>
                 <h3>
-                  <a href="projects/meme-driven-volatility.html?v=site-20260521">
+                  <a href="projects/meme-driven-volatility.html?v=editorial-20261023">
                     <span class="en">Meme-Driven Volatility</span>
                     <span class="zh">Meme 驱动波动率</span>
                   </a>
@@ -182,18 +204,18 @@
                   <span class="chip"><span class="en">Behavioral Finance</span><span class="zh">行为金融</span></span>
                   <span class="chip plum"><span class="en">Portfolio Sorting</span><span class="zh">投资组合排序</span></span>
                 </div>
-                <a class="read-more" href="projects/meme-driven-volatility.html?v=site-20260521"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
+                <a class="read-more" href="projects/meme-driven-volatility.html?v=editorial-20261023"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
               </div>
             </article>
 
-            <article class="project-cover-card">
-              <a class="project-cover-media contain" href="projects/bank-personal-finance-marketing.html?v=site-20260521" aria-label="Open bank marketing project">
+            <article class="project-cover-card" data-research-category="banking">
+              <a class="project-cover-media contain" href="projects/bank-personal-finance-marketing.html?v=editorial-20261023" aria-label="Open bank marketing project">
                 <img src="assets/img/bank-paper-chart-000.jpg" alt="Bank A personal loan product structure by year">
               </a>
               <div class="project-cover-body">
                 <p class="project-cover-meta"><span class="en">Banking Strategy · Consumer Finance</span><span class="zh">银行策略 · 消费金融</span></p>
                 <h3>
-                  <a href="projects/bank-personal-finance-marketing.html?v=site-20260521">
+                  <a href="projects/bank-personal-finance-marketing.html?v=editorial-20261023">
                     <span class="en">Banking Customer Analytics</span>
                     <span class="zh">银行客户行为分析</span>
                   </a>
@@ -207,15 +229,20 @@
                   <span class="chip"><span class="en">Marketing Analytics</span><span class="zh">营销分析</span></span>
                   <span class="chip gold"><span class="en">Academic Research</span><span class="zh">学术研究</span></span>
                 </div>
-                <a class="read-more" href="projects/bank-personal-finance-marketing.html?v=site-20260521"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
+                <a class="read-more" href="projects/bank-personal-finance-marketing.html?v=editorial-20261023"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
               </div>
             </article>
           </div>
         </section>
 
+        <section class="portfolio-close" aria-labelledby="conversation-heading">
+          <div><h2 id="conversation-heading"><span class="en">Continue the conversation.</span><span class="zh">进一步交流</span></h2><p><span class="en">Research questions, investment risk, or opportunities to work together.</span><span class="zh">欢迎探讨研究问题、投资风险与合作机会。</span></p></div>
+          <a class="read-more" href="contact.html"><span class="en">Get in touch</span><span class="zh">联系我</span></a>
+        </section>
+
         <footer class="footer"><span>© 2026 Jerry Chen</span><a href="contact.html"><span class="en">Get in touch</span><span class="zh">联系我</span></a></footer>
       </main>
     </div>
-    <script src="assets/js/main.js?v=finance-20261023"></script>
+    <script src="assets/js/main.js?v=editorial-20261023"></script>
   </body>
 </html>
