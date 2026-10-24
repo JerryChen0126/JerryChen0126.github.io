@@ -5,55 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Project note on an AI infrastructure thematic fund for a Canadian university endowment.">
     <title>AI Infrastructure Fund · Jerry Chen</title>
-    <link rel="stylesheet" href="../assets/css/styles.css?v=blue-20260711">
+    <link rel="stylesheet" href="../assets/css/styles.css?v=finance-20261023">
   </head>
   <body>
     <div class="layout">
-      <aside class="sidebar">
-        <a class="portrait" href="../index.html?v=site-20260711" aria-label="Home">
-          <picture>
-            <source srcset="../assets/img/jerry-photo-ai-portrait.png" type="image/png">
-            <img src="../assets/img/jerry-photo-ai-portrait.png" alt="Jerry Chen">
-          </picture>
-        </a>
-        <div class="identity">
-          <h1>Jerry Chen</h1>
-          <p>
-            <span class="en">Master of Mathematical Finance student at the University of Toronto, with experience across risk, banking consulting, and empirical finance research.</span>
-            <span class="zh">多伦多大学数学金融硕士在读，具备风险管理、银行科技咨询和实证金融研究经历。</span>
-          </p>
-        </div>
-        <nav class="sidebar-nav" aria-label="Site navigation">
-          <a class="nav-home" href="../index.html?v=site-20260711"><span><span class="en">Portfolio</span><span class="zh">作品集</span></span></a>
-          <a class="nav-about" href="../about.html?v=site-20260711"><span><span class="en">About Me</span><span class="zh">关于我</span></span></a>
-          <a class="nav-contact" href="../contact.html?v=site-20260711"><span><span class="en">Contact</span><span class="zh">联系</span></span></a>
-        </nav>
-        <div class="sidebar-links">
-          <a class="small-link" href="mailto:Pengbiao.chen@mail.utoronto.ca">Email</a>
-          <a class="small-link" href="https://www.linkedin.com/in/pengbiao-c-1286a42b0/" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a class="small-link" href="https://github.com/JerryChen0126" target="_blank" rel="noreferrer">GitHub</a>
-          <a class="small-link" href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
-          <a class="small-link" href="../assets/docs/Pengbiao_Jerry_Chen_Resume.pdf"><span class="en">Resume</span><span class="zh">简历</span></a>
-        </div>
-        <div class="controls">
-          <div class="segmented" aria-label="Language">
-            <button type="button" data-lang-button="en" aria-pressed="true">EN</button>
-            <button type="button" data-lang-button="zh" aria-pressed="false">中</button>
+      <a class="skip-link" href="#content"><span class="en">Skip to content</span><span class="zh">跳转至正文</span></a>
+      <header class="site-header">
+        <div class="header-inner">
+          <a class="site-brand" href="../index.html">Jerry Chen<span class="brand-period" aria-hidden="true">.</span></a>
+          <nav class="site-nav" aria-label="Main navigation">
+            <a href="../index.html" aria-current="page"><span class="en">Portfolio</span><span class="zh">作品集</span></a>
+            <a href="../about.html"><span class="en">About Me</span><span class="zh">关于我</span></a>
+            <a href="../contact.html"><span class="en">Contact</span><span class="zh">联系</span></a>
+          </nav>
+          <div class="segmented language-control" role="group" aria-label="Language">
+            <button type="button" data-lang-button="en" aria-pressed="true" lang="en">EN</button>
+            <button type="button" data-lang-button="zh" aria-pressed="false" lang="zh-Hans">中</button>
           </div>
-          <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
-            <span data-theme-label>Dark</span>
-          </button>
         </div>
-      </aside>
+      </header>
 
-      <main class="main">
+      <main id="content" class="main main-article" tabindex="-1">
         <article>
           <header class="article-header">
-            <p class="eyebrow">Thematic Investing · Portfolio Construction · Endowment Allocation</p>
-            <h2>
-              <span class="en">AI Infrastructure Becomes a Fund Thesis</span>
-              <span class="zh">把 AI 基建瓶颈转化为基金组合 thesis</span>
-            </h2>
+            <p class="eyebrow"><span class="en">Thematic Investing · Portfolio Construction · Endowment Allocation</span><span class="zh">主题投资 · 投资组合构建 · 捐赠基金配置</span></p>
+            <h1>
+              <span class="en">AI Infrastructure Portfolio</span>
+              <span class="zh">AI 基础设施投资组合</span>
+            </h1>
             <p>
               <span class="en">
                 This project turns the AI build-out into an investable fund proposal. The important move is not simply saying "AI will grow"; it is mapping the physical bottlenecks behind AI demand into portfolio sleeves, risk limits, liquidity terms and an allocation case for a Canadian university endowment.
@@ -64,7 +43,7 @@
             </p>
             <div class="chips">
               <span class="chip accent">Thematic Investing</span>
-              <span class="chip gold">Portfolio Construction</span>
+              <span class="chip gold"><span class="en">Portfolio Construction</span><span class="zh">投资组合构建</span></span>
               <span class="chip">Endowment</span>
               <span class="chip plum">Risk Budget</span>
             </div>
@@ -171,7 +150,7 @@
 
             <section id="portfolio" class="article-section">
               <h2>
-                <span class="en">Portfolio Construction</span>
+                <span class="en"><span class="en">Portfolio Construction</span><span class="zh">投资组合构建</span></span>
                 <span class="zh">组合构建</span>
               </h2>
               <p>
@@ -416,7 +395,7 @@
           </div>
         </article>
 
-        <footer class="footer">© 2026 Pengbiao (Jerry) Chen</footer>
+        <footer class="footer"><span>© 2026 Jerry Chen</span><a href="../contact.html"><span class="en">Get in touch</span><span class="zh">联系我</span></a></footer>
       </main>
     </div>
     <script>
@@ -428,6 +407,6 @@
       };
     </script>
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/main.js?v=finance-20261023"></script>
   </body>
 </html>

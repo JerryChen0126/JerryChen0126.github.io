@@ -5,60 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Pengbiao Jerry Chen project archive.">
     <title>Projects · Pengbiao (Jerry) Chen</title>
-    <link rel="stylesheet" href="assets/css/styles.css?v=blue-20260711">
+    <link rel="stylesheet" href="assets/css/styles.css?v=finance-20261023">
   </head>
   <body>
     <div class="layout">
-      <aside class="sidebar">
-        <a class="portrait" href="index.html?v=site-20260521" aria-label="Home">
-          <picture>
-            <source srcset="assets/img/jerry-photo-ai-portrait.png" type="image/png">
-            <img src="assets/img/jerry-photo-ai-portrait.png" alt="Pengbiao Jerry Chen">
-          </picture>
-        </a>
-        <div class="identity">
-          <h1>Jerry Chen</h1>
-          <p>
-            <span class="en">Master of Mathematical Finance student at the University of Toronto, with experience across risk, banking consulting, and empirical finance research.</span>
-            <span class="zh">多伦多大学数学金融硕士在读，具备风险管理、银行科技咨询和实证金融研究经历。</span>
-          </p>
-        </div>
-        <nav class="sidebar-nav" aria-label="Site navigation">
-          <a class="nav-home" href="index.html?v=site-20260521"><span><span class="en">Portfolio</span><span class="zh">作品集</span></span></a>
-          <a class="nav-about" href="about.html?v=site-20260521"><span><span class="en">About Me</span><span class="zh">关于我</span></span></a>
-          <a class="nav-contact" href="contact.html?v=site-20260521"><span><span class="en">Contact</span><span class="zh">联系</span></span></a>
-        </nav>
-        <div class="sidebar-links">
-          <a class="small-link" href="mailto:Pengbiao.chen@mail.utoronto.ca">Email</a>
-          <a class="small-link" href="https://www.linkedin.com/in/pengbiao-c-1286a42b0/" target="_blank" rel="noreferrer">LinkedIn</a>
-          <a class="small-link" href="https://github.com/JerryChen0126" target="_blank" rel="noreferrer">GitHub</a>
-          <a class="small-link" href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
-          <a class="small-link" href="assets/docs/Pengbiao_Jerry_Chen_Resume.pdf"><span class="en">Resume</span><span class="zh">简历</span></a>
-        </div>
-        <div class="controls">
-          <div class="segmented" aria-label="Language">
-            <button type="button" data-lang-button="en" aria-pressed="true">EN</button>
-            <button type="button" data-lang-button="zh" aria-pressed="false">中</button>
+      <a class="skip-link" href="#content"><span class="en">Skip to content</span><span class="zh">跳转至正文</span></a>
+      <header class="site-header">
+        <div class="header-inner">
+          <a class="site-brand" href="index.html">Jerry Chen<span class="brand-period" aria-hidden="true">.</span></a>
+          <nav class="site-nav" aria-label="Main navigation">
+            <a href="index.html" aria-current="page"><span class="en">Portfolio</span><span class="zh">作品集</span></a>
+            <a href="about.html"><span class="en">About Me</span><span class="zh">关于我</span></a>
+            <a href="contact.html"><span class="en">Contact</span><span class="zh">联系</span></a>
+          </nav>
+          <div class="segmented language-control" role="group" aria-label="Language">
+            <button type="button" data-lang-button="en" aria-pressed="true" lang="en">EN</button>
+            <button type="button" data-lang-button="zh" aria-pressed="false" lang="zh-Hans">中</button>
           </div>
-          <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
-            <span data-theme-label>Dark</span>
-          </button>
         </div>
-      </aside>
+      </header>
 
-      <main class="main">
+      <main id="content" class="main main-portfolio" tabindex="-1">
         <section class="page-title compact-title">
           <p class="eyebrow">
             <span class="en">Project archive</span>
             <span class="zh">项目归档</span>
           </p>
-          <h2>
-            <span class="en">Quant & Risk Portfolio</span>
-            <span class="zh">量化与风险项目集</span>
-          </h2>
+          <h1>
+            <span class="en">Quantitative Research &amp; Risk</span>
+            <span class="zh">量化研究与风险分析</span>
+          </h1>
         </section>
 
-        <section class="section" aria-label="Projects">
+        <section class="section project-section" aria-labelledby="selected-work">
+          <h2 id="selected-work" class="sr-only"><span class="en">Selected Research</span><span class="zh">精选研究</span></h2>
           <div class="project-cover-list">
             <article class="project-cover-card">
               <a class="project-cover-media contain" href="projects/cbam-equity-repricing.html?v=20260918" aria-label="Open CBAM equity repricing paper">
@@ -81,112 +61,160 @@
             </article>
 
             <article class="project-cover-card">
-              <a class="project-cover-media contain" href="projects/oracle-issuer-forward.html?v=site-20260711">
+              <a class="project-cover-media contain" href="projects/oracle-issuer-forward.html?v=site-20260711" aria-label="Open Oracle issuer forward project">
                 <img src="assets/img/project-oracle-forward-sale.png" alt="Oracle issuer forward sale recommendation slide">
               </a>
               <div class="project-cover-body">
-                <p class="project-cover-meta">Corporate Risk · Capital Structure</p>
-                <h3><a href="projects/oracle-issuer-forward.html?v=site-20260711">Oracle Locks Its AI Financing Window</a></h3>
-                <p>A hedging and financing case for Oracle's AI cloud capex cycle, centered on a $10B issuer forward sale plus rate and FX overlays.</p>
+                <p class="project-cover-meta"><span class="en">Corporate Risk · Capital Structure</span><span class="zh">企业风险 · 资本结构</span></p>
+                <h3>
+                  <a href="projects/oracle-issuer-forward.html?v=site-20260711">
+                    <span class="en">Oracle Financing &amp; Hedging</span>
+                    <span class="zh">Oracle 融资与对冲</span>
+                  </a>
+                </h3>
+                <p>
+                  <span class="en">A hedging and financing case for Oracle's AI cloud investment cycle, evaluating a proposed $10B issuer forward sale with interest-rate and currency hedges.</span>
+                  <span class="zh">针对 Oracle AI 云基础设施投资周期，评估 100 亿美元发行人远期售股方案及配套的利率与汇率对冲。</span>
+                </p>
                 <div class="chips">
-                  <span class="chip accent">Risk Management</span>
-                  <span class="chip">Derivatives</span>
-                  <span class="chip plum">Capital Raising</span>
+                  <span class="chip accent"><span class="en">Risk Management</span><span class="zh">风险管理</span></span>
+                  <span class="chip"><span class="en">Derivatives</span><span class="zh">衍生品</span></span>
+                  <span class="chip plum"><span class="en">Capital Raising</span><span class="zh">资本筹集</span></span>
                 </div>
-                <a class="read-more" href="projects/oracle-issuer-forward.html?v=site-20260711">Open note</a>
+                <a class="read-more" href="projects/oracle-issuer-forward.html?v=site-20260711"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
               </div>
             </article>
 
             <article class="project-cover-card">
-              <a class="project-cover-media contain" href="projects/ai-infrastructure-fund.html?v=site-20260711">
+              <a class="project-cover-media contain" href="projects/ai-infrastructure-fund.html?v=site-20260711" aria-label="Open AI infrastructure fund project">
                 <img src="assets/img/project-ai-infra-portfolio-map.png" alt="AI infrastructure supply-chain portfolio map">
               </a>
               <div class="project-cover-body">
-                <p class="project-cover-meta">Thematic Investing · Portfolio Design</p>
-                <h3><a href="projects/ai-infrastructure-fund.html?v=site-20260711">AI Infrastructure Becomes a Fund Thesis</a></h3>
-                <p>A long-biased institutional fund proposal that converts AI capex, power scarcity, and supply-chain bottlenecks into portfolio weights and risk limits.</p>
+                <p class="project-cover-meta"><span class="en">Thematic Investing · Portfolio Design</span><span class="zh">主题投资 · 投资组合设计</span></p>
+                <h3>
+                  <a href="projects/ai-infrastructure-fund.html?v=site-20260711">
+                    <span class="en">AI Infrastructure Portfolio</span>
+                    <span class="zh">AI 基础设施投资组合</span>
+                  </a>
+                </h3>
+                <p>
+                  <span class="en">A long-biased institutional fund proposal that converts AI capex, power scarcity, and supply-chain bottlenecks into portfolio weights and risk limits.</span>
+                  <span class="zh">以多头为主的机构基金提案，将 AI 资本开支、电力稀缺与供应链瓶颈转化为组合权重、风险预算和捐赠基金配置建议。</span>
+                </p>
                 <div class="chips">
-                  <span class="chip gold">Portfolio Construction</span>
-                  <span class="chip accent">AI Infrastructure</span>
-                  <span class="chip">Endowment Allocation</span>
+                  <span class="chip gold"><span class="en">Portfolio Construction</span><span class="zh">投资组合构建</span></span>
+                  <span class="chip accent"><span class="en">AI Infrastructure</span><span class="zh">AI 基础设施</span></span>
+                  <span class="chip"><span class="en">Endowment Allocation</span><span class="zh">捐赠基金配置</span></span>
                 </div>
-                <a class="read-more" href="projects/ai-infrastructure-fund.html?v=site-20260711">Open note</a>
+                <a class="read-more" href="projects/ai-infrastructure-fund.html?v=site-20260711"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
               </div>
             </article>
 
             <article class="project-cover-card">
-              <a class="project-cover-media contain" href="projects/factor-model-mvo.html?v=site-20260524">
+              <a class="project-cover-media contain" href="projects/factor-model-mvo.html?v=site-20260524" aria-label="Open factor model MVO project">
                 <img src="assets/img/project-factor-mvo-wealth.png" alt="Portfolio wealth evolution for factor-model MVO portfolios">
               </a>
               <div class="project-cover-body">
-                <p class="project-cover-meta">Quantitative Investment · Model Validation</p>
-                <h3><a href="projects/factor-model-mvo.html?v=site-20260524">LASSO Beats Higher In-Sample Fit</a></h3>
-                <p>A rolling factor-model test comparing OLS, Fama-French, LASSO, and BSS as inputs to long-only MVO portfolios.</p>
+                <p class="project-cover-meta"><span class="en">Quantitative Investment · Model Validation</span><span class="zh">量化投资 · 模型验证</span></p>
+                <h3>
+                  <a href="projects/factor-model-mvo.html?v=site-20260524">
+                    <span class="en">Factor Models &amp; Allocation</span>
+                    <span class="zh">因子模型与资产配置</span>
+                  </a>
+                </h3>
+                <p>
+                  <span class="en">A rolling factor-model test comparing OLS, Fama-French, LASSO, and BSS as inputs to long-only MVO portfolios.</span>
+                  <span class="zh">用滚动窗口比较 OLS、Fama-French、LASSO 和 BSS 作为 long-only MVO 投资组合输入时的样本外表现。</span>
+                </p>
                 <div class="chips">
-                  <span class="chip accent">Factor Models</span>
-                  <span class="chip">MVO</span>
-                  <span class="chip plum">Model Validation</span>
+                  <span class="chip accent"><span class="en">Factor Models</span><span class="zh">因子模型</span></span>
+                  <span class="chip"><span class="en">MVO</span><span class="zh">均值方差优化</span></span>
+                  <span class="chip plum"><span class="en">Model Validation</span><span class="zh">模型验证</span></span>
                 </div>
-                <a class="read-more" href="projects/factor-model-mvo.html?v=site-20260524">Open note</a>
+                <a class="read-more" href="projects/factor-model-mvo.html?v=site-20260524"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
               </div>
             </article>
 
             <article class="project-cover-card">
-              <a class="project-cover-media contain" href="projects/algorithmic-asset-management.html?v=site-20260524">
+              <a class="project-cover-media contain" href="projects/algorithmic-asset-management.html?v=site-20260524" aria-label="Open algorithmic asset management project">
                 <img src="assets/img/project-algo-mvo-wealth.png" alt="Backtested portfolio wealth evolution">
               </a>
               <div class="project-cover-body">
-                <p class="project-cover-meta">Portfolio Construction · Backtesting</p>
-                <h3><a href="projects/algorithmic-asset-management.html?v=site-20260524">OLS-MVO Doubles Wealth in Backtest</a></h3>
-                <p>An algorithmic asset-management loop using a 36-month factor window, long-only MVO, semiannual rebalancing, and turnover tracking.</p>
+                <p class="project-cover-meta"><span class="en">Portfolio Construction · Backtesting</span><span class="zh">投资组合构建 · 回测</span></p>
+                <h3>
+                  <a href="projects/algorithmic-asset-management.html?v=site-20260524">
+                    <span class="en">Algorithmic Asset Management</span>
+                    <span class="zh">算法资产管理</span>
+                  </a>
+                </h3>
+                <p>
+                  <span class="en">An algorithmic asset-management loop using a 36-month factor window, long-only MVO, semiannual rebalancing, and turnover tracking.</span>
+                  <span class="zh">一个算法资产管理回测框架：36 个月因子估计窗口、long-only MVO、半年再平衡，并跟踪换手率。</span>
+                </p>
                 <div class="chips">
-                  <span class="chip gold">Portfolio Construction</span>
-                  <span class="chip accent">Backtesting</span>
-                  <span class="chip">Risk Control</span>
+                  <span class="chip gold"><span class="en">Portfolio Construction</span><span class="zh">投资组合构建</span></span>
+                  <span class="chip accent"><span class="en">Backtesting</span><span class="zh">回测</span></span>
+                  <span class="chip"><span class="en">Risk Control</span><span class="zh">风险控制</span></span>
                 </div>
-                <a class="read-more" href="projects/algorithmic-asset-management.html?v=site-20260524">Open note</a>
+                <a class="read-more" href="projects/algorithmic-asset-management.html?v=site-20260524"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
               </div>
             </article>
 
             <article class="project-cover-card">
-              <a class="project-cover-media contain" href="projects/meme-driven-volatility.html?v=site-20260521">
+              <a class="project-cover-media contain" href="projects/meme-driven-volatility.html?v=site-20260521" aria-label="Open meme volatility project">
                 <img src="assets/img/project-meme-cumulative-returns.png" alt="Cumulative returns by MDV exposure group">
               </a>
               <div class="project-cover-body">
-                <p class="project-cover-meta">Quantitative Research · Asset Pricing</p>
-                <h3><a href="projects/meme-driven-volatility.html?v=site-20260521">Meme Volatility Spread Is Fragile</a></h3>
-                <p>A 1-minute-bar factor test that estimates MDV exposure, sorts stocks out of sample, and checks whether the spread survives controls.</p>
+                <p class="project-cover-meta"><span class="en">Quantitative Research · Asset Pricing</span><span class="zh">量化研究 · 资产定价</span></p>
+                <h3>
+                  <a href="projects/meme-driven-volatility.html?v=site-20260521">
+                    <span class="en">Meme-Driven Volatility</span>
+                    <span class="zh">Meme 驱动波动率</span>
+                  </a>
+                </h3>
+                <p>
+                  <span class="en">A 1-minute-bar factor test that estimates MDV exposure, sorts stocks out of sample, and checks whether the spread survives controls.</span>
+                  <span class="zh">用 1 分钟行情估计 MDV 暴露，做样本外组合排序，并检验价差在控制变量下是否仍然成立。</span>
+                </p>
                 <div class="chips">
-                  <span class="chip accent">Quant Research</span>
-                  <span class="chip">Behavioral Finance</span>
-                  <span class="chip plum">Portfolio Sorting</span>
+                  <span class="chip accent"><span class="en">Quant Research</span><span class="zh">量化研究</span></span>
+                  <span class="chip"><span class="en">Behavioral Finance</span><span class="zh">行为金融</span></span>
+                  <span class="chip plum"><span class="en">Portfolio Sorting</span><span class="zh">投资组合排序</span></span>
                 </div>
-                <a class="read-more" href="projects/meme-driven-volatility.html?v=site-20260521">Open note</a>
+                <a class="read-more" href="projects/meme-driven-volatility.html?v=site-20260521"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
               </div>
             </article>
 
             <article class="project-cover-card">
-              <a class="project-cover-media contain" href="projects/bank-personal-finance-marketing.html?v=site-20260521">
+              <a class="project-cover-media contain" href="projects/bank-personal-finance-marketing.html?v=site-20260521" aria-label="Open bank marketing project">
                 <img src="assets/img/bank-paper-chart-000.jpg" alt="Bank A personal loan product structure by year">
               </a>
               <div class="project-cover-body">
-                <p class="project-cover-meta">Banking Strategy · Consumer Finance</p>
-                <h3><a href="projects/bank-personal-finance-marketing.html?v=site-20260521">Involvement Drives Demand</a></h3>
-                <p>A survey-regression note translating customer behavior evidence into product, service, promotion, and channel strategy.</p>
+                <p class="project-cover-meta"><span class="en">Banking Strategy · Consumer Finance</span><span class="zh">银行策略 · 消费金融</span></p>
+                <h3>
+                  <a href="projects/bank-personal-finance-marketing.html?v=site-20260521">
+                    <span class="en">Banking Customer Analytics</span>
+                    <span class="zh">银行客户行为分析</span>
+                  </a>
+                </h3>
+                <p>
+                  <span class="en">A survey-regression note translating customer behavior evidence into product, service, promotion, and channel strategy.</span>
+                  <span class="zh">基于问卷和回归结果，把客户行为证据转化为产品、服务、促销和渠道策略。</span>
+                </p>
                 <div class="chips">
-                  <span class="chip plum">Banking Strategy</span>
-                  <span class="chip">Marketing Analytics</span>
-                  <span class="chip gold">Academic Research</span>
+                  <span class="chip plum"><span class="en">Banking Strategy</span><span class="zh">银行策略</span></span>
+                  <span class="chip"><span class="en">Marketing Analytics</span><span class="zh">营销分析</span></span>
+                  <span class="chip gold"><span class="en">Academic Research</span><span class="zh">学术研究</span></span>
                 </div>
-                <a class="read-more" href="projects/bank-personal-finance-marketing.html?v=site-20260521">Open note</a>
+                <a class="read-more" href="projects/bank-personal-finance-marketing.html?v=site-20260521"><span class="en">Read research</span><span class="zh">阅读研究</span></a>
               </div>
             </article>
           </div>
         </section>
 
-        <footer class="footer">© 2026 Pengbiao (Jerry) Chen</footer>
+        <footer class="footer"><span>© 2026 Jerry Chen</span><a href="contact.html"><span class="en">Get in touch</span><span class="zh">联系我</span></a></footer>
       </main>
     </div>
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/main.js?v=finance-20261023"></script>
   </body>
 </html>
